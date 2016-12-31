@@ -1,0 +1,20 @@
+{
+    "manifest_version": 2,
+
+    "name": "safe-search",
+    "description": "Safe Search on Google, Bing, Yahoo, and DuckDuckGo",
+    "version": "0.0.1",
+
+    "icons": {
+	"128": "icon.png"
+    },
+
+    "background": {
+	"scripts": ["background.js"]
+    },
+    "permissions": [
+	"<all_urls>",
+	"webRequest",
+	"webRequestBlocking"
+    ]
+}

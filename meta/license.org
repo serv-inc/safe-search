@@ -1,0 +1,3 @@
+* uses
+  - https://www.iconfinder.com/icons/928435/explore_find_look_search_view_zoom_icon#size=128
+  - https://www.iconfinder.com/icons/532631/insurance_protection_safe_safety_secure_security_shield_icon#size=128
