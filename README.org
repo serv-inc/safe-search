@@ -4,5 +4,8 @@ Toggles safe search on Google, Bing, Yahoo, and DuckDuckGo.
 https://addons.mozilla.org/en-US/firefox/addon/sas/, and
 https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
 * Versions
+** 0.0.2
+*** Added
+    youtube
 ** 0.0.1
    1st: google, bing, yahoo, duckduckgo

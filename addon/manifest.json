@@ -2,8 +2,8 @@
     "manifest_version": 2,
 
     "name": "safe-search",
-    "description": "Safe Search on Google, Bing, Yahoo, and DuckDuckGo",
-    "version": "0.0.1",
+    "description": "Safe Search on Google, YouTube, Bing, Yahoo, and DuckDuckGo",
+    "version": "0.1.0",
 
     "icons": {
 	"128": "icon.png"
