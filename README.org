@@ -1,0 +1,8 @@
+* safe-search
+Toggles safe search on Google, Bing, Yahoo, and DuckDuckGo.
+* Code for Addons at
+https://addons.mozilla.org/en-US/firefox/addon/sas/, and
+https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
+* Versions
+** 0.0.1
+   1st: google, bing, yahoo, duckduckgo
