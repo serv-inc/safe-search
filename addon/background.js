@@ -42,6 +42,7 @@ function _add_if_necessary(uri, needed_part) {
     }
 }
 
+/** redirects all GET urls to safe search variants */
 chrome.webRequest.onBeforeRequest.addListener(
     redirect,
     {urls: ["<all_urls>"], types: ["main_frame", "sub_frame"]},
@@ -49,6 +50,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 
 // copied and adjusted from chrome.webRequest docs
+/** adds youtube restricted header to youtube requests */
 chrome.webRequest.onBeforeSendHeaders.addListener(
     function(details) {
         for (let i = 0; i < details.requestHeaders.length; ++i) {
@@ -62,5 +64,26 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
         return {requestHeaders: details.requestHeaders};
     },
     {urls: ["*://*.youtube.com/*"], types: ["main_frame", "sub_frame"]},
-    ["blocking", "requestHeaders"]);
+    ["blocking", "requestHeaders"]
+);
 
+/** removes all cookies from ixquick/startpage, including safe-search-disable */
+chrome.cookies.onChanged.addListener(function(changeInfo) {
+    if ( changeInfo.removed ) {
+        return;
+    }
+
+    if ( changeInfo.cookie.name === "preferences" &&
+         ( changeInfo.cookie.domain === ".ixquick.com" ||
+           changeInfo.cookie.domain === ".startpage.com" ) ) {
+        _removeCookie(changeInfo.cookie);
+    }
+});
+
+// courtesy of cookie api test extension, as of stackoverflow
+function _removeCookie(cookie) {
+  let url = "http" + (cookie.secure ? "s" : "") + "://" + cookie.domain +
+            cookie.path;
+  chrome.cookies.remove({"url": url, "name": cookie.name});
+}
+        
