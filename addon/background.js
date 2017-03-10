@@ -67,7 +67,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     ["blocking", "requestHeaders"]
 );
 
-/** removes all cookies from ixquick/startpage, including safe-search-disable */
+// todo: document, target specific setting if someone complains
+/** removes the main cookie from ixquick/startpage, which includes
+ * safe-search-disable, and removes dogpile's search prefs cookie
+ */
 chrome.cookies.onChanged.addListener(function(changeInfo) {
     if ( changeInfo.removed ) {
         return;
@@ -78,6 +81,11 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
            changeInfo.cookie.domain === ".startpage.com" ) ) {
         _removeCookie(changeInfo.cookie);
     }
+
+    if ( changeInfo.cookie.name === "ws_prefs" &&
+         ( changeInfo.cookie.domain === "www.dogpile.com" ) ) {
+        _removeCookie(changeInfo.cookie);
+    }
 });
 
 // courtesy of cookie api test extension, as of stackoverflow
@@ -86,4 +94,3 @@ function _removeCookie(cookie) {
             cookie.path;
   chrome.cookies.remove({"url": url, "name": cookie.name});
 }
-        

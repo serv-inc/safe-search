@@ -1,9 +1,12 @@
 * safe-search
-Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, and Startpage
+Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, and Dogpile.
 * Code for Addons at
 https://addons.mozilla.org/en-US/firefox/addon/sas/, and
 https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
 * Versions
+** 0.2.1
+*** Added
+    dogpile.com
 ** 0.2.0
 *** Added
     startpage.com, ixquick.com
