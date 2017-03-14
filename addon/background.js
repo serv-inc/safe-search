@@ -1,5 +1,10 @@
 "use strict";
-
+/**
+* @fileinfo creates main code to both alter URLs and edit cookies to
+*   enforce safe search
+*
+*   licensed under the MPL 2.0 by (github.com/serv-inc)
+*/
 /* jshint esversion: 6, strict: global */
 /* globals chrome */
 
