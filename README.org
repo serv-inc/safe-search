@@ -4,12 +4,15 @@ Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startp
 https://addons.mozilla.org/en-US/firefox/addon/sas/, and
 https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
 * Versions
+** 2.2.0
+*** Added
+    yandex.com
 ** 2.1.0
 *** Changed
     code file lacked license mention
 ** 2.0.0
 *** Changed
-    Version bump: an exact copy of my version 0.1.0 at mozilla has version 1.0.
+    Version bump: a copy of my version 0.1.0 at mozilla has version 1.0.
 ** 0.2.1
 *** Added
     dogpile.com

@@ -1,12 +1,12 @@
 "use strict";
-/**
-* @fileinfo creates main code to both alter URLs and edit cookies to
-*   enforce safe search
-*
-*   licensed under the MPL 2.0 by (github.com/serv-inc)
-*/
 /* jshint esversion: 6, strict: global */
 /* globals chrome */
+// licensed under the MPL 2.0 by (github.com/serv-inc)
+
+/**
+* @fileoverview alters URLs, sends headers, and deletes cookies to
+*   enforce safe search
+*/
 
 // td2: vimeo (edit cookies)
 function redirect(requestDetails) {
@@ -34,10 +34,16 @@ function _alter(uri) {
         if ( uri.indexOf("q=") != -1 ) {
             return _add_if_necessary(uri, "kp=1");
         }
+    } else if ( uri.indexOf("yandex.") != -1 ) {
+        if ( uri.indexOf("/search") != -1 ) {
+            return _add_if_necessary(uri, "fyandex=1");
+        }
     }
     return false;
 }
 
+
+// todo: should also remove, (and should(?) add & *or* ? depending)
 /** @return url with parameter added if it does not already exist, else false */
 function _add_if_necessary(uri, needed_part) {
     if (uri.indexOf(needed_part) == -1) {
