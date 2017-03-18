@@ -1,9 +1,12 @@
 * safe-search
-Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, and Dogpile.
+Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, and Yandex.
 * Code for Addons at
 https://addons.mozilla.org/en-US/firefox/addon/sas/, and
 https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
 * Versions
+** 2.3.0
+*** Changed
+    did not work on Google Chrome's/Chromium's omnibox search
 ** 2.2.0
 *** Added
     yandex.com

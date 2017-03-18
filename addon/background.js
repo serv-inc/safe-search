@@ -8,7 +8,22 @@
 *   enforce safe search
 */
 
-// td2: vimeo (edit cookies)
+/** redirects all GET urls to safe search variants */
+chrome.webRequest.onBeforeRequest.addListener(
+    redirect,
+    {urls: ["<all_urls>"], types: ["main_frame", "sub_frame"]},
+    ["blocking"]
+);
+/** redirects google chrome's omnibox */
+chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
+    if ( /q=/.test(details.url) ) {
+        let new_url = _add_if_necessary(details.url, "safe=active&ssui=on");
+        if ( new_url ) {
+            chrome.tabs.update(details.tabId, {'url': new_url});
+        }
+    }
+});
+
 function redirect(requestDetails) {
     let redir_url = _alter(requestDetails.url);
     if ( redir_url ) {
@@ -16,11 +31,12 @@ function redirect(requestDetails) {
     }
 }
 
+
 /** alters url if needs to for safe search */
 function _alter(uri) {
     if ( uri.indexOf("google.") != -1 ) {
         if (/q=/.test(uri)) {
-            return _add_if_necessary(uri, "safe=strict");
+            return _add_if_necessary(uri, "safe=active&ssui=on");
         }
     } else if ( uri.indexOf("search.yahoo.") != -1 ) {
         if (/(\/search)/.test(uri)) {
@@ -43,7 +59,7 @@ function _alter(uri) {
 }
 
 
-// todo: should also remove, (and should(?) add & *or* ? depending)
+// todo: should also remove same param, (and maybe add & *or* ? depending)
 /** @return url with parameter added if it does not already exist, else false */
 function _add_if_necessary(uri, needed_part) {
     if (uri.indexOf(needed_part) == -1) {
@@ -52,13 +68,6 @@ function _add_if_necessary(uri, needed_part) {
         return false;
     }
 }
-
-/** redirects all GET urls to safe search variants */
-chrome.webRequest.onBeforeRequest.addListener(
-    redirect,
-    {urls: ["<all_urls>"], types: ["main_frame", "sub_frame"]},
-    ["blocking"]
-);
 
 // copied and adjusted from chrome.webRequest docs
 /** adds youtube restricted header to youtube requests */
@@ -78,6 +87,8 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     ["blocking", "requestHeaders"]
 );
 
+
+// td2: vimeo (edit cookies)
 // todo: document, target specific setting if someone complains
 /** removes the main cookie from ixquick/startpage, which includes
  * safe-search-disable, and removes dogpile's search prefs cookie
