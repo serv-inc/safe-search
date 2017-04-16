@@ -16,7 +16,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 );
 /** redirects google chrome's omnibox */
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
-    if ( /q=/.test(details.url) ) {
+    if ( /webhp.*q=/.test(details.url) ) {
         let new_url = _add_if_necessary(details.url, "safe=active&ssui=on");
         if ( new_url ) {
             chrome.tabs.update(details.tabId, {'url': new_url});
