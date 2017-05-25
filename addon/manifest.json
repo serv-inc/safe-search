@@ -2,8 +2,8 @@
     "manifest_version": 2,
 
     "name": "safe-search",
-    "description": "Safe Search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, and Yandex",
-    "version": "2.3.0",
+    "description": "Safe Search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, and Vimeo",
+    "version": "3.0.0",
 
     "icons": {
         "128": "icon.png"

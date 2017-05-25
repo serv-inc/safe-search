@@ -4,6 +4,9 @@ Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startp
 https://addons.mozilla.org/en-US/firefox/addon/sas/, and
 https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
 * Versions
+** 3.0.0
+*** Added
+    Did not work on Vimeo.
 ** 2.3.0
 *** Changed
     did not work on Google Chrome's/Chromium's omnibox search

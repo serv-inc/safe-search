@@ -108,7 +108,20 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
          ( changeInfo.cookie.domain === "www.dogpile.com" ) ) {
         _removeCookie(changeInfo.cookie);
     }
+
+    // also needs to filter request for first request, see below
+    if ( changeInfo.cookie.name === "content_rating" &&
+         ( changeInfo.cookie.domain === ".vimeo.com" ) ) {
+        _removeCookie(changeInfo.cookie);
+    }
 });
+chrome.webRequest.onBeforeRequest.addListener(
+    function(details) {
+        return { cancel: details.method === "POST" };
+    },
+    {urls: ["*://vimeo.com/settings/contentrating"]},
+    ["blocking"]
+);
 
 // courtesy of cookie api test extension, as of stackoverflow
 function _removeCookie(cookie) {
