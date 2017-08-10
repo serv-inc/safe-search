@@ -1,12 +1,12 @@
-* safe-search
+* Safe Search
 Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, and Vimeo.
-* Code for Addons at
-https://addons.mozilla.org/en-US/firefox/addon/sas/, and
-https://chrome.google.com/webstore/detail/safe-search/fiopkogmohpinncfhneadmpkcikmgkgc
+
+[[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
+[[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
 ** 3.0.0
 *** Added
-    Did not work on Vimeo.
+    vimeo
 ** 2.3.0
 *** Changed
     did not work on Google Chrome's/Chromium's omnibox search

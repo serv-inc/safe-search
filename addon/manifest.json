@@ -1,9 +1,11 @@
 {
     "manifest_version": 2,
 
-    "name": "safe-search",
+    "name": "Safe Search",
     "description": "Safe Search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, and Vimeo",
     "version": "3.0.0",
+    "author": "serv-inc",
+    "homepage_url": "https://github.com/serv-inc/safe-search",
 
     "icons": {
         "128": "icon.png"
