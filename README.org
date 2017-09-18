@@ -4,6 +4,9 @@ Toggles safe search on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startp
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 3.1.0
+*** Lacked
+    extesion short name and image attribution
 ** 3.0.0
 *** Added
     vimeo
