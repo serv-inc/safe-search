@@ -8,6 +8,7 @@
 *   enforce safe search
 */
 
+// =========== URLS ==================
 /** redirects all GET urls to safe search variants */
 chrome.webRequest.onBeforeRequest.addListener(
     redirect,
@@ -69,6 +70,7 @@ function _add_if_necessary(uri, needed_part) {
     }
 }
 
+// =========== HEADERS ==================
 // copied and adjusted from chrome.webRequest docs
 /** adds youtube restricted header to youtube requests */
 chrome.webRequest.onBeforeSendHeaders.addListener(
@@ -88,10 +90,10 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 );
 
 
-// td2: vimeo (edit cookies)
+// =========== COOKIES ==================
 // todo: document, target specific setting if someone complains
-/** removes the main cookie from ixquick/startpage, which includes
- * safe-search-disable, and removes dogpile's search prefs cookie
+/** REMOVES COOKIES: main cookie from ixquick/startpage, dogpile's
+ * search prefs, reddit's over18
  */
 chrome.cookies.onChanged.addListener(function(changeInfo) {
     if ( changeInfo.removed ) {
@@ -112,6 +114,11 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     // also needs to filter request for first request, see below
     if ( changeInfo.cookie.name === "content_rating" &&
          ( changeInfo.cookie.domain === ".vimeo.com" ) ) {
+        _removeCookie(changeInfo.cookie);
+    }
+
+    if ( changeInfo.cookie.name === "over18" &&
+         ( changeInfo.cookie.domain === ".reddit.com" ) ) {
         _removeCookie(changeInfo.cookie);
     }
 });
