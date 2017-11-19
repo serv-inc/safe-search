@@ -3,10 +3,11 @@
 
     "name": "Enforce Safe Search on Search Engines And Others",
     "description": "Toggles the built-in filter on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, Vimeo, and Reddit.",
-    "version": "3.3.0",
+    "version": "3.3.1",
     "author": "serv-inc",
     "homepage_url": "https://github.com/serv-inc/safe-search",
     "short_name": "Enforce Safe Search",
+    "applications": { "gecko": { "id": "@sas" } },
 
     "icons": {
         "128": "icon.png"
