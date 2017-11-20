@@ -1,4 +1,4 @@
-* Safe Search
+* Extension: Enforce Safe Search / Adult Content Filter
 Sets the built-in adult content filter (most often: safe search) on Google,
 YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex,
 Vimeo, and Reddit.
