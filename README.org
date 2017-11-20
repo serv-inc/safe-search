@@ -6,10 +6,9 @@ Vimeo, and Reddit.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
-** 3.3.1
+** 3.3.0
 *** Lacked
     application-id for firefox (required for MS global install)
-** 3.3.0
 *** Had
     mismatched name on FF and Chrome
 ** 3.2.0
