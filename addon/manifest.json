@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
 
-    "name": "Enforce Safe Search / Adult Content Filter",
-    "description": "Toggles the built-in filter on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, Vimeo, and Reddit.",
-    "version": "3.3.0",
+    "name": "Enforce Safe Search (=Adult Filter)",
+    "description": "Toggles the built-in filter on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, Vimeo, Reddit, and ...",
+    "version": "3.4.0",
     "author": "serv-inc",
     "homepage_url": "https://github.com/serv-inc/safe-search",
     "short_name": "Enforce Safe Search",

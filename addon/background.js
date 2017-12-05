@@ -121,6 +121,11 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
          ( changeInfo.cookie.domain === ".reddit.com" ) ) {
         _removeCookie(changeInfo.cookie);
     }
+
+    if ( changeInfo.cookie.name === "ECFG" &&
+         ( changeInfo.cookie.domain === ".ecosia.org" ) ) {
+        _removeCookie(changeInfo.cookie);
+    }
 });
 chrome.webRequest.onBeforeRequest.addListener(
     function(details) {
