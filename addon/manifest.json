@@ -1,28 +1,28 @@
 {
-    "manifest_version": 2,
+  "manifest_version": 2,
 
-    "name": "Enforce Safe Search (=Adult Filter)",
-    "description": "Toggles the built-in filter on Google, YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex, Vimeo, Reddit, and ...",
-    "version": "3.4.0",
-    "author": "serv-inc",
-    "homepage_url": "https://github.com/serv-inc/safe-search",
-    "short_name": "Enforce Safe Search",
-    "applications": {
-      "gecko": { "id": "{b52acdad-e4a6-44da-afc9-9bd22572db99}" }
-    },
+  "name": "Enforce Safe Search (=Adult Filter)",
+  "description": "Toggles the built-in filter on many search engines (see https://github.com/serv-inc/safe-search for a list of sites).",
+  "version": "3.4.2",
+  "author": "serv-inc",
+  "homepage_url": "https://github.com/serv-inc/safe-search",
+  "short_name": "Enforce Safe Search",
+  "applications": {
+    "gecko": { "id": "{b52acdad-e4a6-44da-afc9-9bd22572db99}" }
+  },
 
-    "icons": {
-        "128": "icon.png"
-    },
+  "icons": {
+    "128": "icon.png"
+  },
 
-    "background": {
-        "scripts": ["background.js"]
-    },
-    "permissions": [
-        "<all_urls>",
-        "cookies",
-        "webNavigation",
-        "webRequest",
-        "webRequestBlocking"
-    ]
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "permissions": [
+    "<all_urls>",
+    "cookies",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking"
+  ]
 }

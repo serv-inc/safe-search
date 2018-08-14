@@ -1,5 +1,7 @@
+LINT=./node_modules/jshint/bin/jshint
+
 zip: lint
 	cd addon; zip ../safe.zip *
 
 lint:
-	jshint addon/background.js
+	${LINT} addon/background.js

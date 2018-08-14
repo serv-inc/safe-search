@@ -6,6 +6,12 @@ Vimeo, Reddit, and Ecosia.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 3.4.2
+*** Failed
+    to search on google play and to show google maps
+** 3.4.1
+*** Offended
+    Google's Chrome Web Store reviewers due to too many supported sites (too many keywords in description)
 ** 3.4.0
 *** Lacked
     basic ecosia.org support
