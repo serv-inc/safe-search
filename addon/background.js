@@ -1,5 +1,5 @@
 "use strict";
-/* jshint esversion: 6, strict: global */
+/* jshint esversion: 6, strict: global, laxbreak: true */
 /* globals chrome */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
@@ -125,6 +125,11 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
 
   if ( changeInfo.cookie.name === "ECFG" &&
        ( changeInfo.cookie.domain === ".ecosia.org" ) ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
+  if ( changeInfo.cookie.name === "ff" &&
+       ( changeInfo.cookie.domain === ".dailymotion.com" ) ) {
     _removeCookie(changeInfo.cookie);
   }
 });
