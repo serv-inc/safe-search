@@ -6,6 +6,9 @@ Vimeo, Reddit, and Ecosia.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 3.5.1
+*** Failed
+    generally due to using wrong method
 ** 3.5.0
 *** Lacked
     dailymotion.com support

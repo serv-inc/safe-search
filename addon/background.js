@@ -35,8 +35,9 @@ function redirect(requestDetails) {
 
 /** alters url if needs to for safe search */
 function _alter(uri) {
-  if ( uri.contains("google.")
-       && ! uri.contains("play.google.") && ! uri.contains("maps.google.") ) {
+  if ( uri.indexOf("google.") != -1
+       && uri.indexOf("play.google.") == -1
+       && uri.indexOf("maps.google.") == -1) {
     if (/q=/.test(uri)) {
       return _add_if_necessary(uri, "safe=active&ssui=on");
     }
