@@ -35,26 +35,25 @@ function redirect(requestDetails) {
 
 /** alters url if needs to for safe search */
 function _alter(uri) {
-  if ( uri.indexOf("google.") != -1
-       && uri.indexOf("play.google.") == -1
-       && uri.indexOf("maps.google.") == -1) {
+  if ( uri.includes("google.")
+       && ! uri.includes("play.google.") && ! uri.includes("maps.google.")) {
     if (/q=/.test(uri)) {
       return _add_if_necessary(uri, "safe=active&ssui=on");
     }
-  } else if ( uri.indexOf("search.yahoo.") != -1 ) {
+  } else if ( uri.includes("search.yahoo.") ) {
     if (/(\/search)/.test(uri)) {
       return _add_if_necessary(uri, "vm=r");
     }
-  } else if ( uri.indexOf("bing.") != -1 ) {
+  } else if ( uri.includes("bing.") ) {
     if (/(\/search|\/videos|\/images|\/news)/.test(uri)) {
       return _add_if_necessary(uri, "adlt=strict");
     }
-  } else if ( uri.indexOf("duckduckgo.") != -1 ) {
-    if ( uri.indexOf("q=") != -1 ) {
+  } else if ( uri.includes("duckduckgo.") ) {
+    if ( uri.includes("q=") ) {
       return _add_if_necessary(uri, "kp=1");
     }
-  } else if ( uri.indexOf("yandex.") != -1 ) {
-    if ( uri.indexOf("/search") != -1 ) {
+  } else if ( uri.includes("yandex.") ) {
+    if ( uri.includes("/search") ) {
       return _add_if_necessary(uri, "fyandex=1");
     }
   }
@@ -65,7 +64,7 @@ function _alter(uri) {
 // todo: should also remove same param, (and maybe add & *or* ? depending)
 /** @return url with parameter added if it does not already exist, else false */
 function _add_if_necessary(uri, needed_part) {
-  if (uri.indexOf(needed_part) == -1) {
+  if ( ! uri.includes(needed_part) ) {
     return uri + "&" + needed_part;
   } else {
     return false;
