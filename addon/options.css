@@ -1,0 +1,31 @@
+select {
+    width: 80%;
+    flex: 1;
+    text-align: right;
+}
+
+p {
+    display: flex;
+}
+
+row {
+    width: 100%;
+}
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cell {
+    display: table-cell;
+}
+
+.row {
+    display: table-row;
+}
+
+.options {
+    width: 100%;
+}
