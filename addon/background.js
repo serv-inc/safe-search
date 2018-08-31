@@ -1,6 +1,7 @@
 "use strict";
 /* jshint esversion: 6, strict: global, laxbreak: true */
 /* globals chrome */
+/* globals $set */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
 /**
@@ -77,14 +78,21 @@ function _add_if_necessary(uri, needed_part) {
 /** adds youtube restricted header to youtube requests */
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
-    for (let i = 0; i < details.requestHeaders.length; ++i) {
-      if (details.requestHeaders[i].name === 'YouTube-Restrict') {
-        details.requestHeaders.splice(i, 1);
-        break;
+    if ( $set.youtube > 0 ) {
+      for (let i = 0; i < details.requestHeaders.length; ++i) {
+        if (details.requestHeaders[i].name === 'YouTube-Restrict') {
+          details.requestHeaders.splice(i, 1);
+          break;
+        }
       }
     }
-    details.requestHeaders.push({"name": "YouTube-Restrict",
-                                 "value": "Moderate"});
+    if ( $set.youtube === 1 ) {
+      details.requestHeaders.push({"name": "YouTube-Restrict",
+                                   "value": "Moderate"});
+    } else if ( $set.youtube === 2 ) {
+      details.requestHeaders.push({"name": "YouTube-Restrict",
+                                   "value": "Strict"});
+    }
     return {requestHeaders: details.requestHeaders};
   },
   {urls: ["*://*.youtube.com/*"], types: ["main_frame", "sub_frame"]},
@@ -102,14 +110,29 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     return;
   }
 
+  if ( changeInfo.cookie.name === "ff" &&
+       ( changeInfo.cookie.domain === ".dailymotion.com" ) ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
+  if ( changeInfo.cookie.name === "ws_prefs" &&
+       ( changeInfo.cookie.domain === "www.dogpile.com" ) ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
+  if ( changeInfo.cookie.name === "ECFG" &&
+       ( changeInfo.cookie.domain === ".ecosia.org" ) ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
   if ( changeInfo.cookie.name === "preferences" &&
        ( changeInfo.cookie.domain === ".ixquick.com" ||
          changeInfo.cookie.domain === ".startpage.com" ) ) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "ws_prefs" &&
-       ( changeInfo.cookie.domain === "www.dogpile.com" ) ) {
+  if ( changeInfo.cookie.name === "over18" &&
+       ( changeInfo.cookie.domain === ".reddit.com" ) ) {
     _removeCookie(changeInfo.cookie);
   }
 
@@ -119,18 +142,8 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "over18" &&
-       ( changeInfo.cookie.domain === ".reddit.com" ) ) {
-    _removeCookie(changeInfo.cookie);
-  }
-
-  if ( changeInfo.cookie.name === "ECFG" &&
-       ( changeInfo.cookie.domain === ".ecosia.org" ) ) {
-    _removeCookie(changeInfo.cookie);
-  }
-
-  if ( changeInfo.cookie.name === "ff" &&
-       ( changeInfo.cookie.domain === ".dailymotion.com" ) ) {
+  if ( changeInfo.cookie.name === "dkv" &&
+       ( changeInfo.cookie.domain === ".youtube.com" ) ) {
     _removeCookie(changeInfo.cookie);
   }
 });

@@ -6,6 +6,13 @@ Vimeo, Reddit, Ecosia, and Dailymotion.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 4.0.0
+*** Lacked
+    Youtube-configuration. Youtube offers at least three safe search settings:
+    - no adult content
+    - moderate safe search
+    - strict safe search
+    This extension previously only selected moderate safe search.
 ** 3.6.1
 *** Failed
     for google maps shown via another url than maps.google.com
