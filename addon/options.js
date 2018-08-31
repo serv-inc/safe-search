@@ -15,7 +15,7 @@ function saveOptions(e) {
   }
   let $set = chrome.extension.getBackgroundPage().getSettings();
   if ( ! $set.isManaged("youtube") ) {
-    $set.severity = document.querySelector("#youtube").selectedIndex;
+    $set.youtube = document.querySelector("#youtube").selectedIndex;
   }
   $set.save();
   window.close();
@@ -30,7 +30,7 @@ function restoreOptions() {
   }
   initError = false;
   let $set = chrome.extension.getBackgroundPage().getSettings();
-  document.querySelector("#youtube").selectedIndex = $set.severity;
+  document.querySelector("#youtube").selectedIndex = $set.youtube;
   _disableIfManaged($set, "youtube");
 }
 

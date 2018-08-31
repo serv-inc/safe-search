@@ -6,6 +6,9 @@ Vimeo, Reddit, Ecosia, and Dailymotion.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 4.0.1
+*** Failed
+    to correctly set the option from the UI.
 ** 4.0.0
 *** Lacked
     Youtube-configuration. Youtube offers at least three safe search settings:
