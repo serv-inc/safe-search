@@ -7,7 +7,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
 ** 4.1.1
-*** Failed on Quant.com main web page
+*** Failed on first search on quant.com
 ** 4.1.0
 *** Lacked Qwant.com
     Currently, this uses strict mode. If moderate mode works for you, you can file an issue to change this.
