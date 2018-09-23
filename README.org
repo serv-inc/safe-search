@@ -8,7 +8,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
 * Versions
 ** 4.1.0
 *** Lacked Qwant.com
-    Currently, this uses strict mode, as moderate search returns lots of adult content for e.g. "porn".
+    Currently, this uses strict mode. If moderate mode works for you, you can file an issue to change this.
 ** 4.0.1
 *** Failed to correctly set the option from the UI.
 ** 4.0.0
