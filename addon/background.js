@@ -16,7 +16,7 @@ chrome.webRequest.onBeforeRequest.addListener(
   {urls: ["<all_urls>"], types: ["main_frame", "sub_frame"]},
   ["blocking"]
 );
-/** redirects google chrome's omnibox */
+/** redirects google chrome's omnibox that does not reload the page */
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
   if ( /webhp.*q=/.test(details.url) ) {
     let new_url = _add_if_necessary(details.url, "safe=active&ssui=on");
@@ -57,6 +57,10 @@ function _alter(uri) {
   } else if ( uri.includes("yandex.") ) {
     if ( uri.includes("/search") ) {
       return _add_if_necessary(uri, "fyandex=1");
+    }
+  } else if ( uri.includes("qwant.") ) {
+    if ( uri.includes("q=") || uri.includes("/search/") ) {
+      return _add_if_necessary(uri, "s=2");
     }
   }
   return false;
