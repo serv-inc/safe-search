@@ -13,7 +13,7 @@
 /** redirects all GET urls to safe search variants */
 chrome.webRequest.onBeforeRequest.addListener(
   redirect,
-  {urls: ["<all_urls>"], types: ["main_frame", "sub_frame"]},
+  {urls: ["<all_urls>"], types: ["main_frame", "sub_frame", "xmlhttprequest"]},
   ["blocking"]
 );
 /** redirects google chrome's omnibox that does not reload the page */
@@ -60,7 +60,7 @@ function _alter(uri) {
     }
   } else if ( uri.includes("qwant.") ) {
     if ( uri.includes("q=") || uri.includes("/search/") ) {
-      return _add_if_necessary(uri, "s=2");
+      return _add_if_necessary(_add_if_necessary(uri, "s=2"), "safesearch=2");
     }
   }
   return false;
