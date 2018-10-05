@@ -2,6 +2,8 @@
 /* jshint esversion: 6, strict: global, laxbreak: true */
 /* globals chrome */
 /* globals $set */
+/* globals URL */
+/* globals URLSearchParams */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
 /**
@@ -41,32 +43,47 @@ function _alter(uri) {
        && ! uri.includes("maps.google.") && ! uri.includes("/maps/")
        && ! uri.includes("play.google.") ) {
     if (/q=/.test(uri)) {
-      return _add_if_necessary(uri, "safe=active&ssui=on");
+      return _meta_add(_meta_add(uri, "safe", "active"), "ssui", "on");
     }
   } else if ( uri.includes("search.yahoo.") ) {
     if (/(\/search)/.test(uri)) {
-      return _add_if_necessary(uri, "vm=r");
+      return _meta_add(uri, "vm", "r");
     }
   } else if ( uri.includes("bing.") ) {
     if (/(\/search|\/videos|\/images|\/news)/.test(uri)) {
-      return _add_if_necessary(uri, "adlt=strict");
+      return _meta_add(uri, "adlt", "strict");
     }
   } else if ( uri.includes("duckduckgo.") ) {
     if ( uri.includes("q=") ) {
-      return _add_if_necessary(uri, "kp=1");
+      return _meta_add(uri, "kp", "1");
     }
   } else if ( uri.includes("yandex.") ) {
     if ( uri.includes("/search") ) {
-      return _add_if_necessary(uri, "fyandex=1");
+      return _meta_add(uri, "fyandex", "1");
     }
   } else if ( uri.includes("qwant.") ) {
     if ( uri.includes("q=") || uri.includes("/search/") ) {
-      return _add_if_necessary(_add_if_necessary(uri, "s=2"), "safesearch=2");
+      return _meta_add(_meta_add(uri, "s", "2"), "safesearch", "2");
     }
   }
   return false;
 }
 
+/** @return uri with key=value instead of or in addition to other params */
+function _meta_add(uri, key, value) {
+  try {
+    let newurl = new URL(uri);
+    let params = new URLSearchParams(newurl.search);
+    if ( params.has("key") && params.get("key") === value ) {
+      return false;
+    }
+    params.set(key, value);
+    newurl.search = "?" + params.toString();
+    return newurl.href;
+  } catch ( refError ) {
+    return _add_if_necessary(uri, "key" + "=" + "value");
+  }
+}
 
 // todo: should also remove same param, (and maybe add & *or* ? depending)
 /** @return url with parameter added if it does not already exist, else false */
