@@ -74,14 +74,14 @@ function _meta_add(uri, key, value) {
   try {
     let newurl = new URL(uri);
     let params = new URLSearchParams(newurl.search);
-    if ( params.has("key") && params.get("key") === value ) {
+    if ( params.has(key) && params.get(key) === value ) {
       return false;
     }
     params.set(key, value);
     newurl.search = "?" + params.toString();
     return newurl.href;
   } catch ( refError ) {
-    return _add_if_necessary(uri, "key" + "=" + "value");
+    return _add_if_necessary(uri, key + "=" + value);
   }
 }
 

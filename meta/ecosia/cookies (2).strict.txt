@@ -1,0 +1,11 @@
+# HTTP Cookie File downloaded with cookies.txt by Genuinous @genuinous
+# This file can be used by wget, curl, aria2c and other standard compliant tools.
+# Usage Examples:
+#   1) wget -x --load-cookies cookies.txt "https://www.ecosia.org/?c=de"
+#   2) curl --cookie cookies.txt "https://www.ecosia.org/?c=de"
+#   3) aria2c --load-cookies cookies.txt "https://www.ecosia.org/?c=de"
+#
+.ecosia.org	TRUE	/com.snowplowanalytics.snowplow	FALSE	1543997798	sp	1e711769-c463-419a-a82f-17027afcfdbe
+.ecosia.org	TRUE	/	FALSE	1543997797	ECFG	l=de:nt=0:dt=pc:nf=1:fr=0:as=1:cs=1:fs=1:t=0:ps=1:mc=de-de:f=y:a=0:lt=0
+.ecosia.org	TRUE	/	FALSE	1575533797	ecosia_sp2id.3d5d	8f4a6997-e03f-4688-8b1f-aba65572d5be.1512461351.1.1512461798.1512461351.ae507f40-edc7-4604-a34f-61ae3c76f078
+.ecosia.org	TRUE	/	FALSE	1512463597	ecosia_sp2ses.3d5d	*
