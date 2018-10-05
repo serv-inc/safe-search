@@ -74,7 +74,9 @@ function _meta_add(uri, key, value) {
   try {
     let newurl = new URL(uri);
     let params = new URLSearchParams(newurl.search);
-    if ( params.has(key) && params.get(key) === value ) {
+    if ( params.has(key)
+         && params.get(key) === value
+         && params.getAll(key).length === 1 ) {
       return false;
     }
     params.set(key, value);

@@ -36,5 +36,12 @@ describe("Addon", function() {
       expect(_alter(uri)).toEqual(
         "http://google.de/search?q=test&safe=active&hello=world&ssui=on");
     });
+
+    it("for Google triplicate with different values", function() {
+      let uri = "http://google.de/search?q=test&safe=active&hello=world&safe=off";
+      
+      expect(_alter(uri)).toEqual(
+        "http://google.de/search?q=test&safe=active&hello=world&ssui=on");
+    });
   });
 });

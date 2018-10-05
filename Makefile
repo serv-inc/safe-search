@@ -10,3 +10,4 @@ lint:
 	python2 -m json.tool addon/schema.json > /dev/null
 	tidy -eq addon/options.html
 	chromium-browser ./test/SpecRunner.html &
+	firefox-esr ./test/SpecRunner.html &
