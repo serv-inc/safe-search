@@ -6,6 +6,8 @@ Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 4.2.1
+*** Broke everything
 ** 4.2.0
 *** Might have added URL search parameter twice
 ** 4.1.2
