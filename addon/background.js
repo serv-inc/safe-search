@@ -37,35 +37,20 @@ function redirect(requestDetails) {
 
 /** alters url if needs to for safe search */
 function _alter(uri) {
-  if ( uri.includes("google.")
-       // SOME_DAY: try to shorten/refactor
-       && ! uri.includes("docs.google.")
-       && ! uri.includes("drive.google.") && ! uri.includes("/drive/")
-       && ! uri.includes("maps.google.") && ! uri.includes("/maps/")
-       && ! uri.includes("play.google.") ) {
-    if (/q=/.test(uri)) {
-      return _meta_add(_meta_add(uri, "safe", "active"), "ssui", "on");
-    }
-  } else if ( uri.includes("search.yahoo.") ) {
-    if (/(\/search)/.test(uri)) {
-      return _meta_add(uri, "vm", "r");
-    }
-  } else if ( uri.includes("bing.") ) {
-    if (/(\/search|\/videos|\/images|\/news)/.test(uri)) {
+  if ( /google\..*q=/.test(uri)
+       && ! /(docs|drive|maps|play)\.google/.test(uri)
+       && ! /\/(drive|maps)\//.test(uri) ) {
+    return _meta_add(_meta_add(uri, "safe", "active"), "ssui", "on");
+  } else if ( /search.yahoo.*\/search/.test(uri) ) {
+    return _meta_add(uri, "vm", "r");
+  } else if ( /bing\..*(\/search|\/videos|\/images|\/news)/.test(uri) ) {
       return _meta_add(uri, "adlt", "strict");
-    }
-  } else if ( uri.includes("duckduckgo.") ) {
-    if ( uri.includes("q=") ) {
+  } else if ( /duckduckgo\..*q=/.test(uri) ) {
       return _meta_add(uri, "kp", "1");
-    }
-  } else if ( uri.includes("yandex.") ) {
-    if ( uri.includes("/search") ) {
-      return _meta_add(uri, "fyandex", "1");
-    }
-  } else if ( uri.includes("qwant.") ) {
-    if ( uri.includes("q=") || uri.includes("/search/") ) {
-      return _meta_add(_meta_add(uri, "s", "2"), "safesearch", "2");
-    }
+  } else if ( /yandex\..*\/search/.test(uri) ) {
+    return _meta_add(uri, "fyandex", "1");
+  } else if ( /qwant\..*(q=|\/search\/)/.test(uri) ) {
+    return _meta_add(_meta_add(uri, "s", "2"), "safesearch", "2");
   }
   return false;
 }

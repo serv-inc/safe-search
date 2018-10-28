@@ -6,6 +6,8 @@ Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 4.3.0
+*** Chrome complained about uri.includes
 ** 4.2.3
 *** Broke Google Drive
 ** 4.2.2
