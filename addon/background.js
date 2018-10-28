@@ -35,11 +35,12 @@ function redirect(requestDetails) {
   }
 }
 
-
 /** alters url if needs to for safe search */
 function _alter(uri) {
   if ( uri.includes("google.")
+       // SOME_DAY: try to shorten/refactor
        && ! uri.includes("docs.google.")
+       && ! uri.includes("drive.google.") && ! uri.includes("/drive/")
        && ! uri.includes("maps.google.") && ! uri.includes("/maps/")
        && ! uri.includes("play.google.") ) {
     if (/q=/.test(uri)) {
