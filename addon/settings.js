@@ -12,18 +12,25 @@ class Settings {
   /** initializes from managed, local storage. on first load from preset.json */
   constructor() {
     let _self = this;
-    this._settings = {};
-    this._managed = [];
     this._initialized = false;
-    this._loaded = false;
-    this._saved = true;
     this._listeners = {};
-    let storagePolyfill = chrome.storage.managed || { get: (a, b) => b({}) };
-    storagePolyfill.get(null, result => {
-      for (let el in result) {
-        if ( result.hasOwnProperty(el) ) {
-          this._managed.push(el);
-          this._addToSettings(el, result[el]);
+    this._loaded = false;
+    this._managed = [];
+    this._saved = true;
+    this._settings = {};
+    if (typeof(chrome.storage) === "undefined") {
+      console.error("no chrome.storage available (FF with empty managed storage?)");
+      this._loadFileSettings();
+      return;
+    }
+    let managedPolyfill = (chrome.storage.managed || { get: (a, b) => b({}) });
+    managedPolyfill.get(null, result => {
+      if ( typeof(result) !== "undefined" ) {
+        for (let el in result) {
+          if ( result.hasOwnProperty(el) ) {
+            this._managed.push(el);
+            this._addToSettings(el, result[el]);
+          }
         }
       }
       chrome.storage.local.get(null, result => {
@@ -122,8 +129,10 @@ class Settings {
         out[el] = this._settings[el];
       }
     }
-    chrome.storage.local.set(out);
-    this._saved = true;
+    if (typeof(chrome.storage) !== "undefined") {
+      chrome.storage.local.set(out);
+      this._saved = true;
+    }
   }
 
 

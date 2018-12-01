@@ -5,6 +5,8 @@
 /* globals URL */
 /* globals URLSearchParams */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
+/* globals alert */
+
 
 /**
  * @fileoverview alters URLs, sends headers, and deletes cookies to
@@ -21,7 +23,7 @@ chrome.webRequest.onBeforeRequest.addListener(
 /** redirects google chrome's omnibox that does not reload the page */
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
   if ( /webhp.*q=/.test(details.url) ) {
-    let new_url = _add_if_necessary(details.url, "safe=active&ssui=on");
+    let new_url = _meta_add(details.url, ["safe", "ssui"], ["active", "on"]);
     if ( new_url ) {
       chrome.tabs.update(details.tabId, {'url': new_url});
     }
@@ -35,52 +37,46 @@ function redirect(requestDetails) {
   }
 }
 
-/** alters url if needs to for safe search */
+/** alters url if needs to for safe search, false if no change needed */
 function _alter(uri) {
   if ( /google\..*q=/.test(uri)
        && ! /(docs|drive|maps|play)\.google/.test(uri)
        && ! /\/(drive|maps)\//.test(uri) ) {
-    return _meta_add(_meta_add(uri, "safe", "active"), "ssui", "on");
+    return _meta_add(uri, ["safe", "ssui"], ["active", "on"]);
   } else if ( /search.yahoo.*\/search/.test(uri) ) {
-    return _meta_add(uri, "vm", "r");
+    return _meta_add(uri, ["vm"], ["r"]);
   } else if ( /bing\..*(\/search|\/videos|\/images|\/news)/.test(uri) ) {
-      return _meta_add(uri, "adlt", "strict");
+      return _meta_add(uri, ["adlt"], ["strict"]);
   } else if ( /duckduckgo\..*q=/.test(uri) ) {
-      return _meta_add(uri, "kp", "1");
+      return _meta_add(uri, ["kp"], ["1"]);
   } else if ( /yandex\..*\/search/.test(uri) ) {
-    return _meta_add(uri, "fyandex", "1");
+    return _meta_add(uri, ["fyandex"], ["1"]);
   } else if ( /qwant\..*(q=|\/search\/)/.test(uri) ) {
-    return _meta_add(_meta_add(uri, "s", "2"), "safesearch", "2");
+    return _meta_add(uri, ["s", "safesearch"], ["2", "2"]);
   }
   return false;
 }
 
-/** @return uri with key=value instead of or in addition to other params */
-function _meta_add(uri, key, value) {
-  try {
-    let newurl = new URL(uri);
-    let params = new URLSearchParams(newurl.search);
-    if ( params.has(key)
-         && params.get(key) === value
-         && params.getAll(key).length === 1 ) {
-      return false;
+/** @return uri with key[i]=value[i] for all i instead of or in addition to other params, false if no change needed */
+function _meta_add(uri, keys, values) {
+  let newurl = new URL(uri);
+  let params = new URLSearchParams(newurl.search);
+  let okcount = 0;
+  for (let i = 0; i < keys.length; i++) {
+    if ( params.has(keys[i])
+         && params.get(keys[i]) === values[i]
+         && params.getAll(keys[i]).length === 1 ) {
+      okcount += 1;
     }
-    params.set(key, value);
-    newurl.search = "?" + params.toString();
-    return newurl.href;
-  } catch ( refError ) {
-    return _add_if_necessary(uri, key + "=" + value);
   }
-}
-
-// todo: should also remove same param, (and maybe add & *or* ? depending)
-/** @return url with parameter added if it does not already exist, else false */
-function _add_if_necessary(uri, needed_part) {
-  if ( ! uri.includes(needed_part) ) {
-    return uri + "&" + needed_part;
-  } else {
+  if (okcount == keys.length) {
     return false;
   }
+  for (let i = 0; i < keys.length; i++) {
+    params.set(keys[i], values[i]);
+  }
+  newurl.search = "?" + params.toString();
+  return newurl.href;
 }
 
 // =========== HEADERS ==================
@@ -88,6 +84,8 @@ function _add_if_necessary(uri, needed_part) {
 /** adds youtube restricted header to youtube requests */
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
+    alert("yt: " + $set.youtube);
+    alert(JSON.stringify(details.requestHeaders));
     if ( $set.youtube > 0 ) {
       for (let i = 0; i < details.requestHeaders.length; ++i) {
         if (details.requestHeaders[i].name === 'YouTube-Restrict') {
@@ -103,9 +101,11 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       details.requestHeaders.push({"name": "YouTube-Restrict",
                                    "value": "Strict"});
     }
+    alert(JSON.stringify(details.requestHeaders));
     return {requestHeaders: details.requestHeaders};
   },
-  {urls: ["*://*.youtube.com/*"], types: ["main_frame", "sub_frame"]},
+  {urls: ["*://*.youtube.com/*", "*://clients1.google.com/*client=youtube*"],
+   types: ["main_frame", "sub_frame"]},
   ["blocking", "requestHeaders"]
 );
 
