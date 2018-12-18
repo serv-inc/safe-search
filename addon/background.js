@@ -5,7 +5,6 @@
 /* globals URL */
 /* globals URLSearchParams */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
-/* globals alert */
 
 
 /**
@@ -84,8 +83,6 @@ function _meta_add(uri, keys, values) {
 /** adds youtube restricted header to youtube requests */
 chrome.webRequest.onBeforeSendHeaders.addListener(
   function(details) {
-    alert("yt: " + $set.youtube);
-    alert(JSON.stringify(details.requestHeaders));
     if ( $set.youtube > 0 ) {
       for (let i = 0; i < details.requestHeaders.length; ++i) {
         if (details.requestHeaders[i].name === 'YouTube-Restrict') {
@@ -101,7 +98,6 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
       details.requestHeaders.push({"name": "YouTube-Restrict",
                                    "value": "Strict"});
     }
-    alert(JSON.stringify(details.requestHeaders));
     return {requestHeaders: details.requestHeaders};
   },
   {urls: ["*://*.youtube.com/*", "*://clients1.google.com/*client=youtube*"],
@@ -121,17 +117,17 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
   }
 
   if ( changeInfo.cookie.name === "ff" &&
-       ( changeInfo.cookie.domain === ".dailymotion.com" ) ) {
+       changeInfo.cookie.domain === ".dailymotion.com" ) {
     _removeCookie(changeInfo.cookie);
   }
 
   if ( changeInfo.cookie.name === "ws_prefs" &&
-       ( changeInfo.cookie.domain === "www.dogpile.com" ) ) {
+       changeInfo.cookie.domain === "www.dogpile.com" ) {
     _removeCookie(changeInfo.cookie);
   }
 
   if ( changeInfo.cookie.name === "ECFG" &&
-       ( changeInfo.cookie.domain === ".ecosia.org" ) ) {
+       changeInfo.cookie.domain === ".ecosia.org" ) {
     _removeCookie(changeInfo.cookie);
   }
 
@@ -142,21 +138,33 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
   }
 
   if ( changeInfo.cookie.name === "over18" &&
-       ( changeInfo.cookie.domain === ".reddit.com" ) ) {
+       changeInfo.cookie.domain === ".reddit.com" ) {
     _removeCookie(changeInfo.cookie);
   }
 
   // also needs to filter request for first request, see below
   if ( changeInfo.cookie.name === "content_rating" &&
-       ( changeInfo.cookie.domain === ".vimeo.com" ) ) {
+       changeInfo.cookie.domain === ".vimeo.com" ) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "dkv" &&
-       ( changeInfo.cookie.domain === ".youtube.com" ) ) {
-    _removeCookie(changeInfo.cookie);
+  if ( changeInfo.cookie.domain === ".youtube.com" ) {
+    if ( changeInfo.cookie.name === "dkv" ) {
+      _removeCookie(changeInfo.cookie);
+    } else if ( changeInfo.cookie.name === "PREFS" && $set.youtube >= 1 ) {
+      let prefs = new URLSearchParams(changeInfo.cookie.value);
+      if ( prefs.get("f2") !== "8000000" ) {
+        prefs.set("f2", "8000000");
+        chrome.cookies.set({
+          "url": "https://youtube.com",
+          "name": "PREFS",
+          "value": prefs.toString()
+        });
+      }
+    }
   }
 });
+
 chrome.webRequest.onBeforeRequest.addListener(
   function(details) {
     return { cancel: details.method === "POST" };
