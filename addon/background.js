@@ -1,9 +1,7 @@
 "use strict";
 /* jshint esversion: 6, strict: global, laxbreak: true */
 /* globals chrome */
-/* globals $set */
-/* globals URL */
-/* globals URLSearchParams */
+/* globals $set, URL, URLSearchParams */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
 
@@ -14,11 +12,12 @@
 
 // =========== URLS ==================
 /** redirects all GET urls to safe search variants */
-chrome.webRequest.onBeforeRequest.addListener(
+chrome.webRequest.onBeforeSendHeaders.addListener(
   redirect,
   {urls: ["<all_urls>"], types: ["main_frame", "sub_frame", "xmlhttprequest"]},
   ["blocking"]
 );
+
 /** redirects google chrome's omnibox that does not reload the page */
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
   if ( /webhp.*q=/.test(details.url) ) {
@@ -36,6 +35,7 @@ function redirect(requestDetails) {
   }
 }
 
+
 /** alters url if needs to for safe search, false if no change needed */
 function _alter(uri) {
   if ( /google\..*q=/.test(uri)
@@ -50,11 +50,21 @@ function _alter(uri) {
       return _meta_add(uri, ["kp"], ["1"]);
   } else if ( /yandex\..*\/search/.test(uri) ) {
     return _meta_add(uri, ["fyandex"], ["1"]);
-  } else if ( /qwant\..*(q=|\/search\/)/.test(uri) ) {
-    return _meta_add(uri, ["s", "safesearch"], ["2", "2"]);
+  } else if ( /qwant.*safesearch/.test(uri) ) {
+    return _meta_add(uri, ["safesearch"], ["2"]);
   }
   return false;
 }
+
+// qwant does some weird stuff, redirecting failed with CORS on FF
+chrome.tabs.onUpdated.addListener(
+  function(tabId, changeInfo, tab) {
+    if (typeof(changeInfo.url) !== "undefined") {
+      if ( /qwant\..*q=/.test(changeInfo.url) ) {
+      }
+    }
+  }
+);
 
 /** @return uri with key[i]=value[i] for all i instead of or in addition to other params, false if no change needed */
 function _meta_add(uri, keys, values) {

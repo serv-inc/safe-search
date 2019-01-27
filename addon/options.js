@@ -1,9 +1,6 @@
 "use strict";
 /* jshint esversion: 6, strict: global */
-/* globals chrome */
-/* globals console */
-/* globals document */
-/* globals window */
+/* globals chrome, console, document, window */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 let initError = false;
 

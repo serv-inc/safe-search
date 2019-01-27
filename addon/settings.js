@@ -1,11 +1,6 @@
 "use strict";
-// todo: test jshint stuff
-/* jshint esversion: 6, strict: global */
-/* jshint loopfunc: true */
-/* jshint laxbreak: true */
-/* globals chrome */
-/* globals XMLHttpRequest */
-/* globals setTimeout */
+/* jshint esversion: 6, strict: global, loopfunc: true, laxbreak: true */
+/* globals chrome, XMLHttpRequest, setTimeout */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
 class Settings {
