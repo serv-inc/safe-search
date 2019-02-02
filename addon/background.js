@@ -126,35 +126,39 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     return;
   }
 
-  if ( changeInfo.cookie.name === "ff" &&
-       changeInfo.cookie.domain === ".dailymotion.com" ) {
+  if ( changeInfo.cookie.domain === ".dailymotion.com" &&
+       changeInfo.cookie.name === "ff" ) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "ws_prefs" &&
-       changeInfo.cookie.domain === "www.dogpile.com" ) {
+  if ( changeInfo.cookie.domain === "www.dogpile.com"
+       && changeInfo.cookie.name === "ws_prefs" ) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "ECFG" &&
-       changeInfo.cookie.domain === ".ecosia.org" ) {
+  if ( changeInfo.cookie.domain === "duckduckgo.com"
+       && changeInfo.cookie.name === "g" ) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "preferences" &&
-       ( changeInfo.cookie.domain === ".ixquick.com" ||
-         changeInfo.cookie.domain === ".startpage.com" ) ) {
+  if ( changeInfo.cookie.domain === ".ecosia.org"
+       && changeInfo.cookie.name === "ECFG" ) {
     _removeCookie(changeInfo.cookie);
   }
 
-  if ( changeInfo.cookie.name === "over18" &&
-       changeInfo.cookie.domain === ".reddit.com" ) {
+  if ( changeInfo.cookie.domain === ".startpage.com"
+       && changeInfo.cookie.name === "preferences" ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
+  if ( changeInfo.cookie.domain === ".reddit.com"
+       && changeInfo.cookie.name === "over18" ) {
     _removeCookie(changeInfo.cookie);
   }
 
   // also needs to filter request for first request, see below
-  if ( changeInfo.cookie.name === "content_rating" &&
-       changeInfo.cookie.domain === ".vimeo.com" ) {
+  if ( changeInfo.cookie.domain === ".vimeo.com"
+       && changeInfo.cookie.name === "content_rating" ) {
     _removeCookie(changeInfo.cookie);
   }
 
