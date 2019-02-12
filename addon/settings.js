@@ -3,6 +3,9 @@
 /* globals chrome, XMLHttpRequest, setTimeout */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
+/**
+* @fileinfo: facilitates saving and retrieving from local and managed storage
+*/
 class Settings {
   /** initializes from managed, local storage. on first load from preset.json */
   constructor() {

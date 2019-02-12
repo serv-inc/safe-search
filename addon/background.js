@@ -146,6 +146,12 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     _removeCookie(changeInfo.cookie);
   }
 
+  if ( changeInfo.cookie.domain === ".patreon.com"
+       && changeInfo.cookie.name === "can_see_nsfw" ) {
+    _removeCookie(changeInfo.cookie);
+    chrome.tabs.reload();
+  }
+  
   if ( changeInfo.cookie.domain === ".startpage.com"
        && changeInfo.cookie.name === "preferences" ) {
     _removeCookie(changeInfo.cookie);
