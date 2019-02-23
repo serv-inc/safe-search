@@ -154,6 +154,15 @@ class Settings {
   }
 }
 
-let $set = new Settings();
+let handler = {
+  set = function(obj, prop, value) {
+    if ! prop in obj {
+      obj._addToSettings(prop, value)
+    } else {
+      obj[prop] = value
+    }
+  }
+}
+let $set = new Proxy(new Settings(), handler);
 /** @return settings to options page */
 function getSettings() { return $set; }
