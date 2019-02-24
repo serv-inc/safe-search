@@ -5,6 +5,7 @@ zip: lint
 
 lint:
 	${LINT} addon/background.js
+	${LINT} addon/settings.js
 	python2 -m json.tool addon/manifest.json > /dev/null
 	python2 -m json.tool addon/preset.json > /dev/null
 	python2 -m json.tool addon/schema.json > /dev/null

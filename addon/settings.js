@@ -1,6 +1,6 @@
 "use strict";
 /* jshint esversion: 6, strict: global, loopfunc: true, laxbreak: true */
-/* globals chrome, XMLHttpRequest, setTimeout */
+/* globals chrome, console, XMLHttpRequest, setTimeout */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
 /**
@@ -155,14 +155,14 @@ class Settings {
 }
 
 let handler = {
-  set = function(obj, prop, value) {
-    if ! prop in obj {
-      obj._addToSettings(prop, value)
+  set : function(obj, prop, value) {
+    if (! (prop in obj)) {
+      obj._addToSettings(prop, value);
     } else {
-      obj[prop] = value
+      obj[prop] = value;
     }
   }
-}
+};
 let $set = new Proxy(new Settings(), handler);
 /** @return settings to options page */
 function getSettings() { return $set; }
