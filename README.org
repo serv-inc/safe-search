@@ -7,7 +7,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
 ** 4.6.0: Options page was uglier
-   - value *lenient* was harder to understand
+   - value /lenient/ was harder to understand
    - lacked link to explanation of values
 ** 4.5.0: Firefox storage failed
 ** 4.4.0: Lacked Patreon adult block
