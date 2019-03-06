@@ -3,7 +3,8 @@
 
   "name": "Enforce Safe Search (=Adult Filter)",
   "description": "Toggles the built-in filter on many search engines (see https://github.com/serv-inc/safe-search for a list of sites).",
-  "version": "4.5.1",
+  "version": "4.5.2",
+
   "author": "serv-inc",
   "homepage_url": "https://github.com/serv-inc/safe-search",
   "short_name": "Enforce Safe Search",
@@ -11,9 +12,7 @@
     "gecko": { "id": "{b52acdad-e4a6-44da-afc9-9bd22572db99}" }
   },
 
-  "icons": {
-    "128": "icon.png"
-  },
+  "icons": { "128": "icon.png" },
 
   "background": {
     "scripts": ["background.js", "settings.js"]
@@ -24,6 +23,7 @@
   "permissions": [
     "<all_urls>",
     "cookies",
+    "storage",
     "webNavigation",
     "webRequest",
     "webRequestBlocking"
