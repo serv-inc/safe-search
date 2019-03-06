@@ -6,23 +6,20 @@ Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
-** 4.4.0
-*** Lacked Patreon adult block
-** 4.3.5
-*** Failed on DuckDuckGo when using POST
+** 4.6.0: Options page was uglier
+   - value *lenient* was harder to understand
+   - lacked link to explanation of values
+** 4.5.0: Firefox storage failed
+** 4.4.0: Lacked Patreon adult block
+** 4.3.5: Failed on DuckDuckGo when using POST
     so POST is disabled for now. If you want/need it, you can raise an issue or update #17.
-** 4.3.4
-*** Firefox failed on Quant
+** 4.3.4: Firefox failed on Quant
     due to CORS implementation
-** 4.3.0
-*** Chrome complained about uri.includes
-** 4.2.3
-*** Broke Google Drive
-** 4.2.2
-*** Was exploitable
+** 4.3.0: Chrome complained about uri.includes
+** 4.2.3: Broke Google Drive
+** 4.2.2: Was exploitable
     credits to @sfrauenfelder
-** 4.2.1
-*** Broke everything
+** 4.2.1: Broke everything
 ** 4.2.0
 *** Might have added URL search parameter twice
 ** 4.1.2
