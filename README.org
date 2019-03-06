@@ -1,7 +1,7 @@
 * Extension: Enforce Safe Search / Adult Content Filter
 Sets the built-in adult content filter (most often: safe search) on Google,
 YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex,
-Vimeo, Reddit, Ecosia, Dailymotion, and Qwant.
+Vimeo, Reddit, Ecosia, Dailymotion, Qwant, and Patreon.
 
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
