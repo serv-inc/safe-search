@@ -16,12 +16,6 @@ class Settings {
     this._managed = [];
     this._saved = true;
     this._settings = {};
-/* // commented until other bug removed  
-    if (typeof(chrome.storage) === "undefined") {
-      console.error("no chrome.storage available (FF with empty managed storage?)");
-      this._loadFileSettings();
-      return;
-    }*/
     let managedPolyfill = (chrome.storage.managed || { get: (a, b) => b({}) });
     managedPolyfill.get(null, result => {
       if ( typeof(result) !== "undefined" ) {
@@ -154,19 +148,7 @@ class Settings {
     xobj.send(null);
   }
 }
-/* // commented out until other bug removed
-let handler = {
-  set : function(obj, prop, value) {
-    if (! (prop in obj)) {
-      obj._addToSettings(prop, value);
-    } else {
-      obj[prop] = value;
-    }
-  }
-};
 
-let $set = new Proxy(new Settings(), handler);
-*/
 let $set = new Settings();
 /** @return settings to options page */
 function getSettings() { return $set; }
