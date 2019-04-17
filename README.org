@@ -6,6 +6,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, Qwant, and Patreon.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 4.6.2: Also failed on Bing
 ** 4.6.1: Failed on DuckDuckGo
 ** 4.6.0: Options page was uglier
    - value /lenient/ was harder to understand

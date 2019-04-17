@@ -38,20 +38,22 @@ function redirect(requestDetails) {
 
 /** alters url if needs to for safe search, false if no change needed */
 function _alter(uri) {
-  if ( /google\..*q=/.test(uri)
-       && ! /(docs|drive|maps|play)\.google/.test(uri)
-       && ! /\/(drive|maps)\//.test(uri) ) {
-    return _meta_add(uri, ["safe", "ssui"], ["active", "on"]);
-  } else if ( /search.yahoo.*\/search/.test(uri) ) {
-    return _meta_add(uri, ["vm"], ["r"]);
-  } else if ( /bing\..*(\/search|\/videos|\/images|\/news)/.test(uri) ) {
+  if ( /bing\..*(\/search|\/videos|\/images|\/news)/.test(uri) ) {
       return _meta_add(uri, ["adlt"], ["strict"]);
   } else if ( /duckduckgo\..*q=/.test(uri) ) {
       return _meta_add(uri, ["kp"], ["1"]);
-  } else if ( /yandex\..*\/search/.test(uri) ) {
-    return _meta_add(uri, ["fyandex"], ["1"]);
+  } else if ( /ecosia.*search/.test(uri) ) {
+    return _meta_add(uri, ["safesearch"], ["2"]);
+  } else if ( /google\..*q=/.test(uri)
+       && ! /(docs|drive|maps|play)\.google/.test(uri)
+       && ! /\/(drive|maps)\//.test(uri) ) {
+    return _meta_add(uri, ["safe", "ssui"], ["active", "on"]);
   } else if ( /qwant.*safesearch/.test(uri) ) {
     return _meta_add(uri, ["safesearch"], ["2"]);
+  } else if ( /search.yahoo.*\/search/.test(uri) ) {
+    return _meta_add(uri, ["vm"], ["r"]);
+  } else if ( /yandex\..*\/search/.test(uri) ) {
+    return _meta_add(uri, ["fyandex"], ["1"]);
   }
   return false;
 }
@@ -124,6 +126,16 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 chrome.cookies.onChanged.addListener(function(changeInfo) {
   if ( changeInfo.removed ) {
     return;
+  }
+
+  if ( changeInfo.cookie.domain === ".bing.com" &&
+       changeInfo.cookie.name === "_SS" ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
+  if ( changeInfo.cookie.domain === ".bing.com" &&
+       changeInfo.cookie.name === "SRCHHPGUSR" ) {
+    _removeCookie(changeInfo.cookie);
   }
 
   if ( changeInfo.cookie.domain === ".dailymotion.com" &&
