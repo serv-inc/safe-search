@@ -141,6 +141,11 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     _removeCookie(changeInfo.cookie);
   }
 
+  if ( changeInfo.cookie.domain === "duckduckgo.com"
+       && changeInfo.cookie.name === "p" ) {
+    _removeCookie(changeInfo.cookie);
+  }
+
   if ( changeInfo.cookie.domain === ".ecosia.org"
        && changeInfo.cookie.name === "ECFG" ) {
     _removeCookie(changeInfo.cookie);
