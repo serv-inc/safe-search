@@ -104,4 +104,6 @@ Vimeo, Reddit, Ecosia, Dailymotion, Qwant, and Patreon.
   - https://www.iconfinder.com/icons/532631/insurance_protection_safe_safety_secure_security_shield_icon#size=128
 ** Libraries
 *** Test
-    - https://seleniumhq.github.io/selenium/docs/api/py/
+**** TODO Selenium
+     - https://seleniumhq.github.io/selenium/docs/api/py/
+     - https://selenium-python.readthedocs.io/page-objects.html
