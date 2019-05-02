@@ -1,8 +1,11 @@
 import os
 import unittest
+
 from selenium import webdriver
 
-os.environ['PATH'] = os.environ['PATH'] + ":."
+DIR = os.path.dirname(__file__)
+
+os.environ['PATH'] = os.environ['PATH'] + ":" + DIR
 
 
 # local testing, remove before CI
@@ -15,11 +18,12 @@ webdriver.DesiredCapabilities.FIREFOX['proxy'] = {
     "proxyType":"MANUAL"
 }
 
+
 class DuckDuckGoTestCase(unittest.TestCase):
 
     def setUp(self):
         profile = webdriver.FirefoxProfile()
-        profile.add_extension(extension="../addon/")
+        profile.add_extension(extension=os.path.join(DIR, "..", "addon"))
         self.browser = webdriver.Firefox(firefox_profile=profile)
 
     def testDuckLoads(self):
