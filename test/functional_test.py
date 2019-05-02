@@ -22,10 +22,6 @@ webdriver.DesiredCapabilities.CHROME['proxy'] = POBJ
 webdriver.DesiredCapabilities.FIREFOX['proxy'] = POBJ
 
 class DuckMixin(object):
-    def testDuckLoads(self):
-        self.browser.get("https://duckduckgo.com")
-        self.assertIn("duckduckgo", self.browser.title.lower())
-
     def testDuckSafe(self):
         self.browser.get("https://duckduckgo.com")
         (self.browser
@@ -37,8 +33,17 @@ class DuckMixin(object):
         # assert that browser.find_element_by_class_name("js-safe-search-temp") still exists, else throws exception
         self.browser.find_element_by_class_name("js-safe-search-temp")
 
+class QwantMixin(object):
+    def testQwant(self):
+        self.browser.get("https://qwant.com")
+        self.browser.implicitly_wait(10)
+        (self.browser
+         .find_element_by_css_selector("input[type=search]")
+         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        self.browser.find_element_by_class_name("no_result")
 
-class DuckDuckGoTestCaseFirefox(unittest.TestCase, DuckMixin):
+
+class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin):
     def setUp(self):
         profile = webdriver.FirefoxProfile()
         profile.add_extension(extension=os.path.join(DIR, "..", "addon"))
@@ -47,7 +52,7 @@ class DuckDuckGoTestCaseFirefox(unittest.TestCase, DuckMixin):
     def tearDown(self):
         self.browser.close()
 
-class DuckDuckGoTestCaseChromium(unittest.TestCase, DuckMixin):
+class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin):
     def setUp(self):
         profile = webdriver.chrome.options.Options()
         profile.add_extension(extension=os.path.join(DIR, "..", "safe.zip"))

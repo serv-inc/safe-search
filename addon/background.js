@@ -59,7 +59,7 @@ function _alter(uri) {
        && ! /(docs|drive|maps|play)\.google/.test(uri)
        && ! /\/(drive|maps)\//.test(uri) ) {
     return _meta_add(uri, ["safe", "ssui"], ["active", "on"]);
-  } else if ( /qwant.com(\/\?|safesearch)/.test(uri) ) {
+  } else if ( /qwant.com/.test(uri) ) {
     return _meta_add(uri, ["safesearch", "s"], ["2", "2"]);
   } else if ( /search.yahoo.*\/search/.test(uri) ) {
     return _meta_add(uri, ["vm"], ["r"]);

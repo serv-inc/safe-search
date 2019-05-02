@@ -14,12 +14,6 @@
   "background": {
     "scripts": ["background.js", "settings.js"]
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*.qwant.com/*"],
-      "js": ["qwant.js"]
-    }
-  ],
   "options_ui": {
     "page": "options.html"
   },
