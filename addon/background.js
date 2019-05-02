@@ -13,7 +13,7 @@
 // =========== URLS ==================
 /** redirects all GET urls to safe search variants */
 chrome.webRequest.onBeforeSendHeaders.addListener(
-  redirect,
+  redirectBefore,
   {urls: ["<all_urls>"], types: ["main_frame", "sub_frame", "xmlhttprequest"]},
   ["blocking"]
 );
@@ -28,10 +28,21 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
   }
 });
 
-function redirect(requestDetails) {
+// DDG otherwise fails
+chrome.webNavigation.onDOMContentLoaded.addListener(redirectDOM);
+
+function redirectBefore(requestDetails) {
   let redir_url = _alter(requestDetails.url);
   if ( redir_url ) {
     return { redirectUrl: redir_url };
+  }
+}
+
+// needed for DDG as the other callback is not called
+function redirectDOM(requestDetails) {
+  let redir_url = _alter(requestDetails.url);
+  if ( redir_url ) {
+      chrome.tabs.update(requestDetails.tabId, {'url': redir_url});
   }
 }
 
@@ -120,6 +131,16 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 // =========== COOKIES ==================
 // todo: document, target specific setting if someone complains
+const DUCKIE = {
+  url:"http://duckduckgo.com/",
+  name: "p",
+  value: "1",
+  domain: "duckduckgo.com",
+  expirationDate: Math.pow(2, 32)-1
+};
+
+chrome.cookies.set(DUCKIE);
+
 /** REMOVES COOKIES: main cookie from ixquick/startpage, dogpile's
  * search prefs, reddit's over18
  */
@@ -149,8 +170,9 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
   }
 
   if ( changeInfo.cookie.domain === "duckduckgo.com"
-       && changeInfo.cookie.name === "g" ) {
+       && changeInfo.cookie.name === "p" ) {
     _removeCookie(changeInfo.cookie);
+    chrome.cookies.set(DUCKIE);
   }
 
   if ( changeInfo.cookie.domain === "duckduckgo.com"
