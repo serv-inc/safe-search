@@ -24,6 +24,18 @@ webdriver.DesiredCapabilities.FIREFOX['proxy'] = POBJ
 class DuckMixin(object):
     def testDuckSafe(self):
         self.browser.get("https://duckduckgo.com")
+        self.search_porn()
+
+    def testDuckPOSTSafe(self):
+        self.browser.get("https://duckduckgo.com")
+        # failed to change settings by hand,
+        # self.browser.get("https://duckduckgo.com/settings")
+        # self.browser.find_element_by_id("setting_kg")
+        # so just set cookie
+        self.browser.add_cookie({"name": "g", "value": "p"})
+        self.search_porn()
+
+    def search_porn(self):
         (self.browser
          .find_element_by_id("search_form_input_homepage")
          .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
@@ -32,6 +44,7 @@ class DuckMixin(object):
         self.browser.find_element_by_class_name("js-safe-search-temp").click()
         # assert that browser.find_element_by_class_name("js-safe-search-temp") still exists, else throws exception
         self.browser.find_element_by_class_name("js-safe-search-temp")
+
 
 class QwantMixin(object):
     def testQwant(self):
@@ -43,6 +56,7 @@ class QwantMixin(object):
         self.browser.find_element_by_class_name("no_result")
 
 
+#### run the tests, one case for each browser, with mixins for each site
 class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin):
     def setUp(self):
         profile = webdriver.FirefoxProfile()
@@ -52,6 +66,7 @@ class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin):
     def tearDown(self):
         self.browser.close()
 
+
 class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin):
     def setUp(self):
         profile = webdriver.chrome.options.Options()
@@ -60,7 +75,6 @@ class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin):
 
     def tearDown(self):
         self.browser.close()
-        
 
 
 if __name__ == "__main__":
