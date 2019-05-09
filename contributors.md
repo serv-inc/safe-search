@@ -1,2 +1,2 @@
-# Supporters
+# Contributors
 * Anmol Singh Jaggi
