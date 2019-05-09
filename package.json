@@ -1,0 +1,31 @@
+{
+  "name": "safe-search",
+  "version": "4.7.3",
+  "description": "\"Toggles the built-in filter on many search engines (see https://github.com/serv-inc/safe-search for a list of sites).\"",
+  "main": "none.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "jasmine": "^3.2.0",
+    "jshint": "^2.10.2"
+  },
+  "scripts": {
+    "test": "todo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/serv-inc/safe-search.git"
+  },
+  "keywords": [
+    "see",
+    "repo"
+  ],
+  "author": "serv-inc",
+  "license": "MPL-2.0",
+  "bugs": {
+    "url": "https://github.com/serv-inc/safe-search/issues"
+  },
+  "homepage": "https://github.com/serv-inc/safe-search#readme"
+}
