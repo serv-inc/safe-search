@@ -176,7 +176,7 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
   }
 
   if ( changeInfo.cookie.domain === "duckduckgo.com"
-       && changeInfo.cookie.name === "p" ) {
+       && changeInfo.cookie.name === "g" ) {
     _removeCookie(changeInfo.cookie);
   }
 
