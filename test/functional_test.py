@@ -53,11 +53,32 @@ class QwantMixin(object):
         (self.browser
          .find_element_by_css_selector("input[type=search]")
          .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
-        self.browser.find_element_by_class_name("no_result")
+
+
+class VimeoMixin(object):
+    def testVimeo(self):
+        self.browser.get("https://vimeo.com")
+        self.browser.implicitly_wait(10)
+        # search
+        self.browser.fullscreen_window()  # only visibile in above normal res
+        (self.browser.find_element_by_css_selector("div[role=search]>button")
+         .click())
+        (self.browser.switch_to_active_element()
+         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        # unset filter
+        (self.browser
+         .find_element_by_class_name("js-edit_mature_settings")
+         .click())
+        self.browser.execute_script(
+            "arguments[0].click()",
+            self.browser.find_element_by_id("contentrating_showall"))
+        self.browser.find_element_by_css_selector("input[type=submit]").click()
+        # check
+        self.browser.find_element_by_class_name("js-edit_mature_settings")
 
 
 #### run the tests, one case for each browser, with mixins for each site
-class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin):
+class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
     def setUp(self):
         profile = webdriver.FirefoxProfile()
         profile.add_extension(extension=os.path.join(DIR, "..", "addon"))
@@ -67,7 +88,7 @@ class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin):
         self.browser.close()
 
 
-class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin):
+class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
     def setUp(self):
         profile = webdriver.chrome.options.Options()
         profile.add_extension(extension=os.path.join(DIR, "..", "safe.zip"))
