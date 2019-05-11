@@ -1,0 +1,13 @@
+# HTTP Cookie File downloaded with cookies.txt by Genuinous @genuinous
+# This file can be used by wget, curl, aria2c and other standard compliant tools.
+# Usage Examples:
+#   1) wget -x --load-cookies cookies.txt "https://vimeo.com/search?q=tits"
+#   2) curl --cookie cookies.txt "https://vimeo.com/search?q=tits"
+#   3) aria2c --load-cookies cookies.txt "https://vimeo.com/search?q=tits"
+#
+.vimeo.com	TRUE	/	TRUE	1872930071	vuid	1943325251.1316803435
+.vimeo.com	TRUE	/	FALSE	1896130800	__ssid	2a5966d2-6797-4a3b-990c-c40d65f951f8
+.vimeo.com	TRUE	/	FALSE	1589105750	continuous_play_v3	1
+.vimeo.com	TRUE	/	FALSE	1589192468	player	&quot;&quot;
+.vimeo.com	TRUE	/	TRUE	1872930045	content_rating	255
+vimeo.com	FALSE	/	FALSE	2188290068	muxData	mux_viewer_id=a58fb8cc-d450-4d91-b264-4d127bfc484a&amp;msn=0.46921057985148495&amp;sid=faf6671d-1e07-4fde-95a2-105cd7251a18&amp;sst=1557567422224&amp;sex=1557571568624
