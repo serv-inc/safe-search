@@ -132,14 +132,33 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 // =========== COOKIES ==================
 // todo: document, target specific setting if someone complains
 const DUCKIE = {
-  url:"http://duckduckgo.com/",
+  url: "http://duckduckgo.com/",
   name: "p",
   value: "1",
   domain: "duckduckgo.com",
   expirationDate: Math.pow(2, 32)-1
 };
-
 chrome.cookies.set(DUCKIE);
+
+const VIMMIEMIN = {
+  url: "https://vimeo.com/",
+  name: "content_rating",
+  value: "191",
+  domain: ".vimeo.com",
+  expirationDate: Math.pow(2, 32)-1
+};
+/** @return if cookie is ok: blocks nudity */
+function vimeoOk(cookie) {
+  return (cookie !== null) && (255 - cookie.value & 64);
+}
+chrome.cookies.get(
+  {url: "https://vimeo.com", name: "content_rating"},
+  (cookie) => {
+    if (!vimeoOk(cookie)) {
+      chrome.cookies.set(VIMMIEMIN);
+    }
+  }
+);
 
 /** REMOVES COOKIES: main cookie from ixquick/startpage, dogpile's
  * search prefs, reddit's over18
@@ -204,7 +223,10 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
   // also needs to filter request for first request, see below
   if ( changeInfo.cookie.domain === ".vimeo.com"
        && changeInfo.cookie.name === "content_rating" ) {
-    _removeCookie(changeInfo.cookie);
+    if (!vimeoOk(changeInfo.cookie)) {
+      _removeCookie(changeInfo.cookie);
+      chrome.cookies.set(VIMMIEMIN);
+    }
   }
 
   if ( changeInfo.cookie.domain === ".youtube.com" ) {
@@ -223,14 +245,6 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     }
   }
 });
-
-chrome.webRequest.onBeforeRequest.addListener(
-  function(details) {
-    return { cancel: details.method === "POST" };
-  },
-  {urls: ["*://vimeo.com/settings/contentrating"]},
-  ["blocking"]
-);
 
 // courtesy of cookie api test extension, as of stackoverflow
 function _removeCookie(cookie) {
