@@ -1,11 +1,12 @@
 * Extension: Enforce Safe Search / Adult Content Filter
 Sets the built-in adult content filter (most often: safe search) on Google,
-YouTube, Bing, Yahoo, DuckDuckGo, Ixquick, Startpage, Dogpile, Yandex,
+YouTube, Bing, Yahoo, DuckDuckGo, Startpage, Dogpile, Yandex,
 Vimeo, Reddit, Ecosia, Dailymotion, Qwant, and Patreon.
 
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 5.1.0: Failed by reloading on non-reload-necessary sites
 ** 5.0.0: Did not allow Vimeo filter customization
    - this enforces a minimum while preserving your settings
 ** 4.7.3: Failed in DuckDuckGo for POST requests
