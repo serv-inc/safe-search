@@ -29,7 +29,10 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
 });
 
 // DDG otherwise fails
-chrome.webNavigation.onDOMContentLoaded.addListener(redirectDOM);
+chrome.webNavigation.onDOMContentLoaded.addListener(
+  redirectDOM,
+  {url: [{hostSuffix: "duckduckgo.com"}]}
+);
 
 function redirectBefore(requestDetails) {
   let redir_url = _alter(requestDetails.url);
