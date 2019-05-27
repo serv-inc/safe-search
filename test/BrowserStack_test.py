@@ -25,7 +25,8 @@ desired_cap = {
 }
 
 opt = webdriver.chrome.options.Options()
-opt.add_extension(extension="/tmp/safe.zip")
+opt.add_extension(extension=os.path.join(
+    os.path.dirname(__file__), "..", "addon"))
 desired_cap.update(opt.to_capabilities())
 
 driver = webdriver.Remote(
