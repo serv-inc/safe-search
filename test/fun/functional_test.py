@@ -1,25 +1,13 @@
-#! /usr/bin/env python2
+#! /usr/bin/env python3
 import os
 import unittest
 
 from selenium import webdriver
 
 DIR = os.path.dirname(__file__)
-
+ADDON_DIR = os.path.abspath(os.path.join(DIR, "..", ".."))
 os.environ['PATH'] = os.environ['PATH'] + ":" + DIR
 
-
-# local testing, remove / comment out before CI
-PROXY='127.0.0.1:8080'
-POBJ = {
-    "httpProxy":PROXY,
-    "ftpProxy":PROXY,
-    "sslProxy":PROXY,
-    "noProxy":[],
-    "proxyType":"MANUAL"
-}
-webdriver.DesiredCapabilities.CHROME['proxy'] = POBJ
-webdriver.DesiredCapabilities.FIREFOX['proxy'] = POBJ
 
 class DuckMixin(object):
     def testDuckSafe(self):
@@ -80,22 +68,21 @@ class VimeoMixin(object):
 #### run the tests, one case for each browser, with mixins for each site
 class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
     def setUp(self):
-        profile = webdriver.FirefoxProfile()
-        profile.add_extension(extension=os.path.join(DIR, "..", "addon"))
-        self.browser = webdriver.Firefox(firefox_profile=profile)
+        self.browser = webdriver.Firefox()
+        self.browser.install_addon(os.path.join(ADDON_DIR, "safe.xpi"), temporary=True)
 
     def tearDown(self):
         self.browser.close()
 
 
-class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
-    def setUp(self):
-        profile = webdriver.chrome.options.Options()
-        profile.add_extension(extension=os.path.join(DIR, "..", "safe.zip"))
-        self.browser = webdriver.Chrome(chrome_options=profile)
+# class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
+#     def setUp(self):
+#         profile = webdriver.chrome.options.Options()
+#         profile.add_extension(extension=os.path.join(DIR, "..", "..", "safe.zip"))
+#         self.browser = webdriver.Chrome(options=profile)
 
-    def tearDown(self):
-        self.browser.close()
+#     def tearDown(self):
+#         self.browser.close()
 
 
 if __name__ == "__main__":
