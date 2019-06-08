@@ -2,6 +2,7 @@ LINT=./node_modules/jshint/bin/jshint
 
 zip: lint
 	cd addon; zip ../safe.zip *
+	cd .. && cp safe.zip safe.xpi
 
 lint:
 	${LINT} addon/background.js
