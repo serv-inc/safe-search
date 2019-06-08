@@ -34,6 +34,18 @@ class DuckMixin(object):
         self.browser.find_element_by_class_name("js-safe-search-temp")
 
 
+class GoogleMixin(object):
+    def testGoo(self):
+        self.browser.get("https://google.com")
+        (self.browser.find_element_by_css_selector("input[type=text]")
+         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        self.browser.implicitly_wait(2)
+        try:
+            self.browser.find_element_by_class_name("ab_ctl")
+        except:
+            self.fail("safe search message not found")
+
+
 class QwantMixin(object):
     def testQwant(self):
         self.browser.get("https://qwant.com")
@@ -41,6 +53,7 @@ class QwantMixin(object):
         (self.browser
          .find_element_by_css_selector("input[type=search]")
          .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        # needs check!
 
 
 class VimeoMixin(object):
@@ -66,7 +79,7 @@ class VimeoMixin(object):
 
 
 #### run the tests, one case for each browser, with mixins for each site
-class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
+class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, GoogleMixin):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.install_addon(os.path.join(ADDON_DIR, "safe.xpi"), temporary=True)
@@ -75,14 +88,14 @@ class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
         self.browser.close()
 
 
-# class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin):
-#     def setUp(self):
-#         profile = webdriver.chrome.options.Options()
-#         profile.add_extension(extension=os.path.join(DIR, "..", "..", "safe.zip"))
-#         self.browser = webdriver.Chrome(options=profile)
+class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, GoogleMixin):
+    def setUp(self):
+        profile = webdriver.chrome.options.Options()
+        profile.add_extension(extension=os.path.join(DIR, "..", "..", "safe.zip"))
+        self.browser = webdriver.Chrome(options=profile)
 
-#     def tearDown(self):
-#         self.browser.close()
+    def tearDown(self):
+        self.browser.close()
 
 
 if __name__ == "__main__":
