@@ -1,5 +1,6 @@
 import inspect
 
+import pytest
 import requests
 import selenium
 from selenium import webdriver
@@ -11,7 +12,7 @@ def fail_browserstack(driver, secret, where):
   requests.put(
     "https://api.browserstack.com/automate/sessions/{}.json".format(driver.session_id),
     auth=tuple(secret.split(":")),
-    json={"status": "failed", "reason": "test failed in {}".format(where)})  
+    json={"status": "failed", "reason": "test failed in {}".format(where)})
 
 
 def test_google(driver, secret):
