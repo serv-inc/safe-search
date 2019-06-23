@@ -29,7 +29,8 @@ def test_google(driver, secret):
 
 def test_duck(driver, secret):
   driver.get("https://duckduckgo.com")
-  (driver.find_element_by_id("search_form_input_homepage")
+  (driver
+   .find_element_by_id("search_form_input_homepage")
    .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
   driver.implicitly_wait(10)
   try:
@@ -37,4 +38,4 @@ def test_duck(driver, secret):
     driver.find_element_by_class_name("js-safe-search-temp")
   except selenium.common.exceptions.NoSuchElementException:
     fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
-    assert False, "safe search element does not exist"
+    pytest.fail("safe search element does not exist")
