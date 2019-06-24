@@ -20,13 +20,13 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 
 /** redirects google chrome's omnibox that does not reload the page */
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(function(details) {
-  if ( /webhp.*q=/.test(details.url) ) {
+  if ( /(webhp|search).*q=/.test(details.url) ) {
     let new_url = _meta_add(details.url, ["safe", "ssui"], ["active", "on"]);
     if ( new_url ) {
       chrome.tabs.update(details.tabId, {'url': new_url});
     }
   }
-});
+}, {url: [{hostContains: "google"}]});
 
 // DDG otherwise fails
 chrome.webNavigation.onDOMContentLoaded.addListener(
@@ -58,9 +58,7 @@ function _alter(uri) {
       return _meta_add(uri, ["kp"], ["1"]);
   } else if ( /ecosia.*search/.test(uri) ) {
     return _meta_add(uri, ["safesearch"], ["2"]);
-  } else if ( /google\..*q=/.test(uri)
-       && ! /(docs|drive|maps|play)\.google/.test(uri)
-       && ! /\/(drive|maps)\//.test(uri) ) {
+  } else if ( /(webhp|search).*q=/.test(uri) ) {
     return _meta_add(uri, ["safe", "ssui"], ["active", "on"]);
   } else if ( /qwant.com/.test(uri) ) {
     return _meta_add(uri, ["safesearch", "s"], ["2", "2"]);

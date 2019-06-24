@@ -58,20 +58,4 @@ describe("Addon", function() {
       expect(_meta_add(URI_WITHOUT, ["safe", "ssui"], ["active", "on"])).toEqual(URI_WITH);
     });
   });
-
-  describe("should detect google search URLs", function() {
-    it("for searches above", function() {
-      expect(isGoogle(new URL(URI_WITH))).toEqual(true);
-      expect(isGoogle(new URL(URI_WITHOUT))).toEqual(true);
-    });
-    it("for live URL", function() {
-      expect(isGoogle(new URL('https://www.google.com/search?tbm=isch&source=hp&biw=1050&bih=714&ei=YqEPXYbDBIbPwAK4z4OgBg&q=porn&oq=porn&gs_l=img.3...3333.3580..3593...0.0..0.68.396.8......0....1..gws-wiz-img.....0..0.UehEPMi_-34&safe=active&ssui=on#imgrc=qLfN9H5CSrJQsM:'))).toEqual(true);
-    });
-    it("should not detect ducky as a google URL", function() {
-      expect(isGoogle(new URL("http://duckduckgo.com"))).toEqual(false);
-    });
-    it("should not detect google maps as a search URL", function() {
-      expect(true).toEqual(false);  // not implemented
-    });
-  });
 });
