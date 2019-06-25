@@ -1,7 +1,6 @@
 "use strict";
 /* jshint esversion: 6, strict: global, laxbreak: true */
-/* globals chrome */
-/* globals $set, URL, URLSearchParams */
+/* globals chrome, $set, URL, URLSearchParams, window */
 // licensed under the MPL 2.0 by (github.com/serv-inc)
 
 
