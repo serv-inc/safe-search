@@ -13,3 +13,6 @@ lint:
 	tidy -eq addon/options.html
 	chromium-browser ./test/unit/SpecRunner.html &
 	firefox-esr ./test/unit/SpecRunner.html &
+
+dist: zip
+	node ./upload.js

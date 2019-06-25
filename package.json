@@ -1,6 +1,6 @@
 {
   "name": "safe-search",
-  "version": "5.1.0",
+  "version": "5.2.0",
   "description": "\"Toggles the built-in filter on many search engines (see https://github.com/serv-inc/safe-search for a list of sites).\"",
   "main": "none.js",
   "directories": {
@@ -9,7 +9,8 @@
   "dependencies": {},
   "devDependencies": {
     "jasmine": "^3.2.0",
-    "jshint": "^2.10.2"
+    "jshint": "^2.10.2",
+    "webstore-upload": "0.0.8"
   },
   "scripts": {
     "test": "todo"
