@@ -2,3 +2,5 @@ node_modules/
 safe.zip
 safe.xpi
 local.js
+local.js~
+__pycache__

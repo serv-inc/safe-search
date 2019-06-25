@@ -4,7 +4,7 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
-import secret as s
+import local
 
 desired_cap = {
     'browser': 'Chrome',
@@ -24,7 +24,7 @@ desired_cap.update(opt.to_capabilities())
 @pytest.fixture(scope="session")
 def secret():
     '''string in the form key:token for login to browserstack'''
-    return s.LOGIN
+    return local.LOGIN
 
 @pytest.fixture(scope="session")
 def driver(secret):
