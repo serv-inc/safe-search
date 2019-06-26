@@ -4,3 +4,4 @@ safe.xpi
 local.js
 local.js~
 __pycache__
+package-lock.json
