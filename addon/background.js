@@ -57,9 +57,9 @@ function _alter(uri) {
       return _meta_add(uri, ["kp"], ["1"]);
   } else if ( /ecosia.*search/.test(uri) ) {
     return _meta_add(uri, ["safesearch"], ["2"]);
-  } else if ( /(webhp|search).*q=/.test(uri) ) {
+  } else if ( /google.*(webhp|search).*q=/.test(uri) ) {
     return _meta_add(uri, ["safe", "ssui"], ["active", "on"]);
-  } else if ( /qwant.com/.test(uri) ) {
+  } else if ( /qwant.com/.test(uri) ) {  // seems to not be heeded
     return _meta_add(uri, ["safesearch", "s"], ["2", "2"]);
   } else if ( /search.yahoo.*\/search/.test(uri) ) {
     return _meta_add(uri, ["vm"], ["r"]);
