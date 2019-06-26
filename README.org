@@ -6,6 +6,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, Qwant, and Patreon.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 6.0.0: Failed on Qwant after their update
 ** 5.2.0: Failed as Google's search update broke safe search in chrome
 ** 5.1.0: Failed by reloading on non-reload-necessary sites
 ** 5.0.0: Did not allow Vimeo filter customization
