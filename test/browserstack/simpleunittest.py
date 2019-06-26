@@ -39,3 +39,11 @@ def test_duck(driver, secret):
   except selenium.common.exceptions.NoSuchElementException:
     fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
     pytest.fail("safe search element does not exist")
+
+def test_qwant(driver, secret):
+  driver.get("https://qwant.com")
+  # no action necessary: can check on homepage with js
+  if 2 != driver.execute_script(
+    "return applicationState.user.userSetting.safeSearch"):
+    fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
+    pytest.fail("qwant not set to strict safe search")

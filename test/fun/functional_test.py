@@ -49,11 +49,9 @@ class GoogleMixin(object):
 class QwantMixin(object):
     def testQwant(self):
         self.browser.get("https://qwant.com")
-        self.browser.implicitly_wait(10)
-        (self.browser
-         .find_element_by_css_selector("input[type=search]")
-         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
-        # needs check!
+        self.assertEqual(
+            2,
+            browser.execute_script("return applicationState.user.userSetting.safeSearch"))
 
 
 class VimeoMixin(object):
