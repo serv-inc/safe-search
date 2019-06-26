@@ -14,6 +14,10 @@ def fail_browserstack(driver, secret, where):
     auth=tuple(secret.split(":")),
     json={"status": "failed", "reason": "test failed in {}".format(where)})
 
+def fake_click(driver, elem):
+  '''clicks if impossible due to ElementClickInterceptedException'''
+  driver.execute_script("arguments[0].click()", elem)
+
 
 def test_google(driver, secret):
   driver.get('http://images.google.com')
@@ -50,16 +54,16 @@ def test_qwant_no_search(driver, secret):
 
 def test_qwant_search(driver, secret):
   driver.get("https://qwant.com")
-  self.browser.implicitly_wait(10)
-  (self.browser
+  driver.implicitly_wait(10)
+  (driver
    .find_element_by_css_selector("input[type=search]")
    .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
   # unset safe search
   driver.find_element_by_css_selector('span[title="App Menu"]').click()
   driver.find_elements_by_class_name("appmenu__header__user__submenu__element")[1].click()  # settings
   driver.find_elements_by_css_selector('div[role="dropdown"]')[-1].click()  # safe search
-  driver.find_elements_by_class_name('dropdown__item')[0].click()  # text==none
-  driver.find_element_by_class_name('button--confirm').click()
+  fake_click(driver, driver.find_elements_by_class_name('dropdown__item')[0])  # text==none
+  fake_click(driver, driver.find_element_by_class_name('button--confirm'))
   if 2 != driver.execute_script(
     "return applicationState.user.userSetting.safeSearch"):
     fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
