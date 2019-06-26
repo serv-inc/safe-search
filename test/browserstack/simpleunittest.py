@@ -40,9 +40,26 @@ def test_duck(driver, secret):
     fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
     pytest.fail("safe search element does not exist")
 
-def test_qwant(driver, secret):
+def test_qwant_no_search(driver, secret):
   driver.get("https://qwant.com")
   # no action necessary: can check on homepage with js
+  if 2 != driver.execute_script(
+    "return applicationState.user.userSetting.safeSearch"):
+    fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
+    pytest.fail("qwant not set to strict safe search")
+
+def test_qwant_search(driver, secret):
+  driver.get("https://qwant.com")
+  self.browser.implicitly_wait(10)
+  (self.browser
+   .find_element_by_css_selector("input[type=search]")
+   .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+  # unset safe search
+  driver.find_element_by_css_selector('span[title="App Menu"]').click()
+  driver.find_elements_by_class_name("appmenu__header__user__submenu__element")[1].click()  # settings
+  driver.find_elements_by_css_selector('div[role="dropdown"]')[-1].click()  # safe search
+  driver.find_elements_by_class_name('dropdown__item')[0].click()  # text==none
+  driver.find_element_by_class_name('button--confirm').click()
   if 2 != driver.execute_script(
     "return applicationState.user.userSetting.safeSearch"):
     fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
