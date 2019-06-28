@@ -2,7 +2,7 @@
   "type": "object",
   "properties": {
     "youtube": {
-      "description": "how strictly to filter YouTube: 0 is lenient, 1 normal, 2 for the little children",
+      "description": "how strictly to filter YouTube: 0 is under18, 1 normal, 2 for the little children",
       "type": "integer"
     }
   }
