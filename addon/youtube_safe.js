@@ -1,25 +1,21 @@
-/** @fileinfo clicks safe search button on Youtube */
+/** @fileinfo logs user out if mode == 0 */
 let managedPolyfill = (chrome.storage.managed || { get: (a, b) => b({}) });
 
 let DELAY = 250;
 var countdown = 5000;
 
+/** runs ifZeroCallback if settings.youtube is 0 (under18-mode) */
 function getYoutubeState(ifZeroCallback) {
-//  console.log("youtube-safe getYoutubeState");
   managedPolyfill.get(null, result => {
     if ("youtube" in result) {
-//      console.log("youtube-safe managed state " + result.youtube);
       if (result.youtube === 0) {
-//        console.log("youtube-safe managed state == 0");
         ifZeroCallback();
         return;
       }
     } else {
       chrome.storage.local.get(null, result => {
         if ("youtube" in result) {
-//          console.log("youtube-safe local state " + result.youtube);
           if ( result.youtube === 0) {
-//            console.log("youtube-safe local state == 0");
             ifZeroCallback();
           }
         }
@@ -30,7 +26,6 @@ function getYoutubeState(ifZeroCallback) {
 
 /** runs when page has fully loaded, readystate did not work */
 function runOnLoad(callback) {
-//  console.log("runOnLoad");
   if (document.querySelector("#avatar-btn") !== null) {
     callback();
   } else {
@@ -57,5 +52,4 @@ if (loggedin !== null) {
   script.remove();
 }
 
-// console.log("youtube-safe");
 getYoutubeState(() => runOnLoad(logOut));
