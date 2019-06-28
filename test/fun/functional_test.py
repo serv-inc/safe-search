@@ -4,6 +4,7 @@ import unittest
 
 from selenium import webdriver
 
+# __file__ = os.getcwd() + "/"  # paste this if by hand
 DIR = os.path.dirname(__file__)
 ADDON_DIR = os.path.abspath(os.path.join(DIR, "..", ".."))
 os.environ['PATH'] = os.environ['PATH'] + ":" + DIR

@@ -3,7 +3,7 @@
 
   "name": "Enforce Safe Search (=Adult Filter)",
   "description": "Toggles the built-in filter on many search engines (see https://github.com/serv-inc/safe-search for a list of sites).",
-  "version": "6.0.0",
+  "version": "6.1.0",
 
   "author": "serv-inc",
   "homepage_url": "https://github.com/serv-inc/safe-search",
@@ -21,6 +21,10 @@
    }, {
      "matches": ["*://*.qwant.com/*"],
      "js": ["qwant_safe.js"]
+   }, {
+     "matches": ["*://www.youtube.com/watch*",
+                "*://www.youtube.com/"],
+     "js": ["youtube_safe.js"]
    }
  ],
   "options_ui": {
