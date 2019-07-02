@@ -9,6 +9,7 @@ lint:
 	python2 -m json.tool addon/manifest.json > /dev/null
 	python2 -m json.tool addon/preset.json > /dev/null
 	python2 -m json.tool addon/schema.json > /dev/null
+	meta/checkversions.sh
 	tidy -eq addon/options.html
 	chromium-browser ./test/unit/SpecRunner.html &
 	firefox-esr ./test/unit/SpecRunner.html &
@@ -18,4 +19,4 @@ test: zip
 	py.test-3 ./test/browserstack/simpleunittest.py
 
 dist: zip
-	node ./upload.js
+	node ./meta/upload.js
