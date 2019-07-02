@@ -6,7 +6,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, Qwant, and Patreon.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
-** 6.1.0: Youtube failed the under18 mode after a change on their part
+** 6.1.0: Failed on Youtube-under18-mode after their change
 ** 6.0.0: Failed on Qwant after their update
 ** 5.2.0: Failed as Google's search update broke safe search in chrome
 ** 5.1.0: Failed by reloading on non-reload-necessary sites
