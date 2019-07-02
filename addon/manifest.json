@@ -8,6 +8,9 @@
   "author": "serv-inc",
   "homepage_url": "https://github.com/serv-inc/safe-search",
   "short_name": "Enforce Safe Search",
+  "applications": {
+    "gecko": { "id": "{b52acdad-e4a6-44da-afc9-9bd22572db99}" }
+  },
 
   "icons": { "128": "icon.png" },
 
