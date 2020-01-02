@@ -10,9 +10,10 @@
         <label><a
 href="https://github.com/serv-inc/safe-search/wiki/Configure">YouTube-strictness</a>:</label>&nbsp;
         <select id="youtube">
-          <option>under 18 (logs you out)</option>
-          <option>moderate</option>
-          <option>strict</option>
+          <option value="-1">disabled</option>
+          <option value="0">under 18 (logs you out)</option>
+          <option value="1">moderate</option>
+          <option value="2">strict</option>
         </select>
       </p>
       <button class="centered" type="submit">Save</button>

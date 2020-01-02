@@ -12,7 +12,7 @@ function saveOptions(e) {
   }
   let $set = chrome.extension.getBackgroundPage().getSettings();
   if ( ! $set.isManaged("youtube") ) {
-    $set.youtube = document.querySelector("#youtube").selectedIndex;
+    $set.youtube = Number(document.querySelector("#youtube").value);
   }
   $set.save();
   window.close();
