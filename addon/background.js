@@ -65,6 +65,8 @@ function _alter(uri) {
     return _meta_add(uri, ["vm"], ["r"]);
   } else if ( /yandex\..*\/search/.test(uri) ) {
     return _meta_add(uri, ["fyandex"], ["1"]);
+  } else if ( /onesearch.*\/search/.test(uri) ) {
+    return _meta_add(uri, ["vm"], ["r"]);
   }
   return false;
 }
