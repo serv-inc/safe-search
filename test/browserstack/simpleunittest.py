@@ -81,3 +81,12 @@ def test_qwant_search(driver, secret):
     ):
         fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
         pytest.fail("qwant not set to strict safe search")
+
+
+def test_youtube(driver, secret):
+    driver.get("https://www.youtube.com/watch?v=gzVJw1-YrkM")
+    try:
+        driver.find_element_by_tag_name("yt-player-error-message-renderer")
+    except selenium.common.exceptions.NoSuchElementException:
+        fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
+        pytest.fail("youtube does not block video")
