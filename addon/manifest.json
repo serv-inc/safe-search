@@ -18,18 +18,19 @@
     "scripts": ["background.js", "settings.js"]
   },
   "content_scripts": [
-   {
-     "matches": ["*://*/search*"],
-     "js": ["google_safe_fallback.js"]
-   }, {
-     "matches": ["*://*.qwant.com/*"],
-     "js": ["qwant_safe.js"]
-   }, {
-     "matches": ["*://www.youtube.com/watch*",
-                "*://www.youtube.com/"],
-     "js": ["youtube_safe.js"]
-   }
- ],
+    {
+      "matches": ["*://*/search*"],
+      "js": ["google_safe_fallback.js"]
+    },
+    {
+      "matches": ["*://*.qwant.com/*"],
+      "js": ["qwant_safe.js"]
+    },
+    {
+      "matches": ["*://www.youtube.com/watch*", "*://www.youtube.com/"],
+      "js": ["youtube_safe.js"]
+    }
+  ],
   "options_ui": {
     "page": "options.html"
   },
