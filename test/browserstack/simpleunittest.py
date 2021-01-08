@@ -30,7 +30,7 @@ def test_google(driver, secret):
     search.send_keys("porn" + webdriver.common.keys.Keys.RETURN)
     driver.implicitly_wait(10)
     try:
-        driver.find_element_by_id("ss-bimodal-default")
+        driver.find_element_by_link_text("SafeSearch on")
     except selenium.common.exceptions.NoSuchElementException:
         fail_browserstack(driver, secret, inspect.currentframe().f_code.co_name)
         pytest.fail("safe search element does not exist")
