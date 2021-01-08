@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v2.3.0
+    hooks:
+      - id: check-yaml
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/psf/black
+    rev: 19.3b0
+    hooks:
+      - id: black
+  - repo: https://github.com/prettier/prettier
+    rev: "" # Use the sha or tag you want to point at
+    hooks:
+      - id: prettier
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-java
+    sha: 1.3.9
+    hooks:
+      - id: validate-html
+  - repo: https://gitlab.com/devopshq/gitlab-ci-linter
+    rev: v1.0.1
+    hooks:
+      - id: gitlab-ci-linter
