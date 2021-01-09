@@ -1,0 +1,18 @@
+image: node:lts
+
+stages:
+  - setup
+
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+    - .npm/
+
+before_script:
+  - npm ci --cache .npm --prefer-offline
+
+setup:
+  stage: setup
+  needs: []
+  script:
+    - npm install
