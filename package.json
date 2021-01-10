@@ -8,8 +8,8 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "jshint": "^2.10.2",
-    "webstore-upload": "0.0.8"
+    "eslint": "^7.17.0",
+    "eslint-config-google": "^0.14.0"
   },
   "scripts": {
     "test": "make lint"
