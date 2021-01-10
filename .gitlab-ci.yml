@@ -18,8 +18,12 @@ setup:
   script:
     - npm install
 
-test:version:
+test:
   stage: test
   needs: []
   script: make test
-    
+
+test:lint:
+  stage: test
+  needs: [setup]
+  script: npx eslint
