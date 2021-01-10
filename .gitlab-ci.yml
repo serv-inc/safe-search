@@ -2,6 +2,7 @@ image: node:lts
 
 stages:
   - setup
+  - test
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
