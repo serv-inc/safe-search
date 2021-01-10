@@ -16,3 +16,9 @@ setup:
   needs: []
   script:
     - npm install
+
+test:version:
+  stage: test
+  needs: []
+  script: make test
+    
