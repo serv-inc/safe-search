@@ -27,3 +27,9 @@ test:lint:
   stage: test
   needs: [setup]
   script: npx eslint
+
+test:version:
+  image: python-slim
+  stage: test
+  needs: []
+  script: ./meta/same_version.py
