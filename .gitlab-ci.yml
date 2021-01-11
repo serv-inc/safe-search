@@ -21,7 +21,7 @@ setup:
 test:
   stage: test
   needs: []
-  script: make test
+  script: make lint_rest
 
 test:lint:
   stage: test
@@ -33,3 +33,5 @@ test:version:
   stage: test
   needs: []
   script: ./meta/same_version.py
+  before_script:
+  - ''
