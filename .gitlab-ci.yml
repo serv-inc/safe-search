@@ -28,10 +28,15 @@ test:lint:
   needs: [setup]
   script: npx eslint
 
-test:version:
+# same version for files and valid json
+test:py:
   image: python:slim
   stage: test
   needs: []
-  script: ./meta/same_version.py
+  script:
+    - python -m json.tool addon/manifest.json > /dev/null
+    - python -m json.tool addon/preset.json > /dev/null
+    - python -m json.tool addon/schema.json > /dev/null
+    - python meta/same_version.py
   before_script:
-  - ''
+    - ''

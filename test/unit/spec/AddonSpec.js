@@ -48,14 +48,14 @@ describe("Addon", function() {
     });
   });
 
-  describe("should use _meta_add correctly", function() {
+  describe("should use _metaAdd correctly", function() {
     it("for uri containing correct params", function() {
-      expect(_meta_add(URI_WITH, ["ssui"], ["on"])).toEqual(false);
-      expect(_meta_add(URI_WITH, ["safe"], ["active"])).toEqual(false);
-      expect(_meta_add(URI_WITH, ["ssui", "safe"], ["on", "active"])).toEqual(false);
+      expect(_metaAdd(URI_WITH, ["ssui"], ["on"])).toEqual(false);
+      expect(_metaAdd(URI_WITH, ["safe"], ["active"])).toEqual(false);
+      expect(_metaAdd(URI_WITH, ["ssui", "safe"], ["on", "active"])).toEqual(false);
     });
     it("for uri not containing correct params", function() {
-      expect(_meta_add(URI_WITHOUT, ["safe", "ssui"], ["active", "on"])).toEqual(URI_WITH);
+      expect(_metaAdd(URI_WITHOUT, ["safe", "ssui"], ["active", "on"])).toEqual(URI_WITH);
     });
   });
 });
