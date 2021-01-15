@@ -23,7 +23,7 @@ test:lint:
   needs:
     - setup
   script:
-    - npm lint
+    - npm run lint
 
 # same version for files and valid json
 test:py:
