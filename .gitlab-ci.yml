@@ -18,15 +18,12 @@ setup:
   script:
     - npm install
 
-test:
-  stage: test
-  needs: []
-  script: make lint_rest
-
 test:lint:
   stage: test
-  needs: [setup]
-  script: npx eslint
+  needs:
+    - setup
+  script:
+    - npm lint
 
 # same version for files and valid json
 test:py:

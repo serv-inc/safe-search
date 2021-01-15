@@ -12,7 +12,7 @@
     "eslint-config-google": "^0.14.0"
   },
   "scripts": {
-    "test": "make lint"
+    "lint": "eslint addon"
   },
   "repository": {
     "type": "git",
