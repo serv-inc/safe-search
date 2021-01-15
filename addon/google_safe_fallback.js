@@ -1,6 +1,5 @@
 /** @fileinfo clicks safe search button as a fallback */
-var script = document.createElement('script');
-script.textContent = 'document.querySelector("#ss-bimodal-strict").click(); console.log("SAFER")';
+const scr = document.createElement('script');
+scr.textContent = ```document.querySelector('a[href*="safeui=on"')?.click();```;
 (document.head||document.documentElement).appendChild(script);
-script.remove();
-
+scr.remove();
