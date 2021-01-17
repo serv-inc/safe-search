@@ -1,4 +1,4 @@
-LINT="npx eslint"
+LINT=npx eslint
 
 zip: lint
 	cd addon; zip ../safe.zip *

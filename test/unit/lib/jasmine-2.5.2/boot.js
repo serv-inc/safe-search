@@ -8,8 +8,7 @@
  [jasmine-gem]: http://github.com/pivotal/jasmine-gem
  */
 
-(function() {
-
+(function () {
   /**
    * ## Require &amp; Instantiate
    *
@@ -25,14 +24,14 @@
   /**
    * Create the Jasmine environment. This is used to run all specs in a project.
    */
-  var env = jasmine.getEnv();
+  const env = jasmine.getEnv();
 
   /**
    * ## The Global Interface
    *
    * Build up the functions that will be exposed as the Jasmine public interface. A project can customize, rename or alias any of these functions as desired, provided the implementation remains unchanged.
    */
-  var jasmineInterface = jasmineRequire.interface(jasmine, env);
+  const jasmineInterface = jasmineRequire.interface(jasmine, env);
 
   /**
    * Add all of the Jasmine global/public interface to the global scope, so a project can use the public interface directly. For example, calling `describe` in specs instead of `jasmine.getEnv().describe`.
@@ -45,20 +44,24 @@
    * More browser specific code - wrap the query string in an object and to allow for getting/setting parameters from the runner user interface.
    */
 
-  var queryString = new jasmine.QueryString({
-    getWindowLocation: function() { return window.location; }
+  const queryString = new jasmine.QueryString({
+    getWindowLocation: function () {
+      return window.location;
+    },
   });
 
-  var catchingExceptions = queryString.getParam("catch");
-  env.catchExceptions(typeof catchingExceptions === "undefined" ? true : catchingExceptions);
+  const catchingExceptions = queryString.getParam("catch");
+  env.catchExceptions(
+    typeof catchingExceptions === "undefined" ? true : catchingExceptions
+  );
 
-  var throwingExpectationFailures = queryString.getParam("throwFailures");
+  const throwingExpectationFailures = queryString.getParam("throwFailures");
   env.throwOnExpectationFailure(throwingExpectationFailures);
 
-  var random = queryString.getParam("random");
+  const random = queryString.getParam("random");
   env.randomizeTests(random);
 
-  var seed = queryString.getParam("seed");
+  const seed = queryString.getParam("seed");
   if (seed) {
     env.seed(seed);
   }
@@ -67,16 +70,33 @@
    * ## Reporters
    * The `HtmlReporter` builds all of the HTML UI for the runner page. This reporter paints the dots, stars, and x's for specs, as well as all spec names and all failures (if any).
    */
-  var htmlReporter = new jasmine.HtmlReporter({
+  const htmlReporter = new jasmine.HtmlReporter({
     env: env,
-    onRaiseExceptionsClick: function() { queryString.navigateWithNewParam("catch", !env.catchingExceptions()); },
-    onThrowExpectationsClick: function() { queryString.navigateWithNewParam("throwFailures", !env.throwingExpectationFailures()); },
-    onRandomClick: function() { queryString.navigateWithNewParam("random", !env.randomTests()); },
-    addToExistingQueryString: function(key, value) { return queryString.fullStringWithNewParam(key, value); },
-    getContainer: function() { return document.body; },
-    createElement: function() { return document.createElement.apply(document, arguments); },
-    createTextNode: function() { return document.createTextNode.apply(document, arguments); },
-    timer: new jasmine.Timer()
+    onRaiseExceptionsClick: function () {
+      queryString.navigateWithNewParam("catch", !env.catchingExceptions());
+    },
+    onThrowExpectationsClick: function () {
+      queryString.navigateWithNewParam(
+        "throwFailures",
+        !env.throwingExpectationFailures()
+      );
+    },
+    onRandomClick: function () {
+      queryString.navigateWithNewParam("random", !env.randomTests());
+    },
+    addToExistingQueryString: function (key, value) {
+      return queryString.fullStringWithNewParam(key, value);
+    },
+    getContainer: function () {
+      return document.body;
+    },
+    createElement: function () {
+      return document.createElement.apply(document, arguments);
+    },
+    createTextNode: function () {
+      return document.createTextNode.apply(document, arguments);
+    },
+    timer: new jasmine.Timer(),
   });
 
   /**
@@ -88,11 +108,13 @@
   /**
    * Filter which specs will be run by matching the start of the full name against the `spec` query param.
    */
-  var specFilter = new jasmine.HtmlSpecFilter({
-    filterString: function() { return queryString.getParam("spec"); }
+  const specFilter = new jasmine.HtmlSpecFilter({
+    filterString: function () {
+      return queryString.getParam("spec");
+    },
   });
 
-  env.specFilter = function(spec) {
+  env.specFilter = function (spec) {
     return specFilter.matches(spec.getFullName());
   };
 
@@ -109,9 +131,9 @@
    *
    * Replace the browser window's `onload`, ensure it's called, and then run all of the loaded specs. This includes initializing the `HtmlReporter` instance and then executing the loaded Jasmine environment. All of this will happen after all of the specs are loaded.
    */
-  var currentWindowOnload = window.onload;
+  const currentWindowOnload = window.onload;
 
-  window.onload = function() {
+  window.onload = function () {
     if (currentWindowOnload) {
       currentWindowOnload();
     }
@@ -123,8 +145,7 @@
    * Helper function for readability above.
    */
   function extend(destination, source) {
-    for (var property in source) destination[property] = source[property];
+    for (const property in source) destination[property] = source[property];
     return destination;
   }
-
-}());
+})();
