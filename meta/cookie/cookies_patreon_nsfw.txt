@@ -1,0 +1,12 @@
+# HTTP Cookie File downloaded with cookies.txt by Genuinous @genuinous
+# This file can be used by wget, curl, aria2c and other standard compliant tools.
+# Usage Examples:
+#   1) wget -x --load-cookies cookies.txt "https://www.patreon.com/posts/24006181"
+#   2) curl --cookie cookies.txt "https://www.patreon.com/posts/24006181"
+#   3) aria2c --load-cookies cookies.txt "https://www.patreon.com/posts/24006181"
+#
+bonfire.patreon.com	FALSE	/socket.io	FALSE	0	io	YbJItIli1E4UFTYLoWRd
+.patreon.com	TRUE	/	TRUE	1581413712	__cfduid	db85aa851f2cc2a3fc4cf9802278781a61549877711
+.patreon.com	TRUE	/	FALSE	2180597713	patreon_device_id	2e82c0cc-35d4-41b6-901b-c785a50fbf5a
+.patreon.com	TRUE	/	FALSE	2180597720	can_see_nsfw	1
+bonfire.patreon.com	FALSE	/	FALSE	1550485657	AWSALB	EIDWWv9m5y+kUj1jWOy7iywzmlbFfHUTIPdl+zuctWAvzKX+9o8LSMZWi5fGQ5jvyoEBqM2pPO/dV1HEGmorltELdR4gRdg8lp+YMgYdAJ1gZNhhmRSxC6iBBk0V
