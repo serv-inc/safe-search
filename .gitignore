@@ -6,3 +6,4 @@ local.js~
 __pycache__
 package-lock.json
 .v
+.#*
