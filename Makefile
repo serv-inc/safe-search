@@ -1,7 +1,7 @@
 LINT=npx eslint
 
 setup_py:
-	python -m venv .v
+	python3 -m venv .v
 	. .v/bin/activate
 	pip install -r requirements.txt
 
