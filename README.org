@@ -6,6 +6,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, Qwant, Patreon, and Onesearch.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 6.2.1: Failed on Google after to page ids
 ** 6.2.0: Lacked onesearch.com adult block
 Thanks to https://github.com/jawad-lotfi
 ** 6.1.0: Failed on Youtube-under18-mode after their change
