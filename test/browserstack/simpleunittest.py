@@ -10,6 +10,7 @@ from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 
 
 def fail_browserstack(driver, secret, where):
+    driver.save_screenshot("/tmp/failed.png")
     requests.put(
         "https://api.browserstack.com/automate/sessions/{}.json".format(
             driver.session_id
