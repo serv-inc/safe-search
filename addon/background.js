@@ -13,14 +13,14 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
   redirectBefore,
   {
     urls: ["<all_urls>"],
-    types: ["main_frame", "sub_frame", "xmlhttprequest"]
+    types: ["main_frame", "sub_frame", "xmlhttprequest"],
   },
   ["blocking"]
 );
 
 /** redirects google chrome's omnibox that does not reload the page */
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(
-  function(details) {
+  function (details) {
     if (/(webhp|search).*q=/.test(details.url)) {
       const newUrl = _metaAdd(details.url, ["safe", "ssui"], ["active", "on"]);
       if (newUrl) {
@@ -33,7 +33,7 @@ chrome.webNavigation.onReferenceFragmentUpdated.addListener(
 
 // DDG otherwise fails
 chrome.webNavigation.onDOMContentLoaded.addListener(redirectDOM, {
-  url: [{ hostSuffix: "duckduckgo.com" }]
+  url: [{ hostSuffix: "duckduckgo.com" }],
 });
 
 /** redirect all relevant URLs to safe search variants
@@ -115,7 +115,7 @@ function _metaAdd(uri, keys, values) {
 // copied and adjusted from chrome.webRequest docs
 /** adds youtube restricted header to youtube requests */
 chrome.webRequest.onBeforeSendHeaders.addListener(
-  function(details) {
+  function (details) {
     if ($set.youtube > 0 && $set.youtube < 3) {
       for (let i = 0; i < details.requestHeaders.length; ++i) {
         if (details.requestHeaders[i].name === "YouTube-Restrict") {
@@ -127,19 +127,19 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
     if ($set.youtube === 1) {
       details.requestHeaders.push({
         name: "YouTube-Restrict",
-        value: "Moderate"
+        value: "Moderate",
       });
     } else if ($set.youtube === 2) {
       details.requestHeaders.push({
         name: "YouTube-Restrict",
-        value: "Strict"
+        value: "Strict",
       });
     }
     return { requestHeaders: details.requestHeaders };
   },
   {
     urls: ["*://*.youtube.com/*", "*://clients1.google.com/*client=youtube*"],
-    types: ["main_frame", "sub_frame"]
+    types: ["main_frame", "sub_frame"],
   },
   ["blocking", "requestHeaders"]
 );
@@ -151,16 +151,25 @@ const DUCKIE = {
   name: "p",
   value: "1",
   domain: "duckduckgo.com",
-  expirationDate: Math.pow(2, 32) - 1
+  expirationDate: Math.pow(2, 32) - 1,
 };
 chrome.cookies.set(DUCKIE);
+
+const BRAVIE = {
+  url: "http://search.brave.com/",
+  name: "safesearch",
+  value: "strict",
+  domain: "search.brave.com",
+  expirationDate: Math.pow(2, 32) - 1,
+};
+chrome.cookies.set(BRAVIE);
 
 const VIMMIEMIN = {
   url: "https://vimeo.com/",
   name: "content_rating",
   value: "191",
   domain: ".vimeo.com",
-  expirationDate: Math.pow(2, 32) - 1
+  expirationDate: Math.pow(2, 32) - 1,
 };
 
 /** @param {Object} cookie
@@ -170,7 +179,7 @@ function vimeoOk(cookie) {
 }
 chrome.cookies.get(
   { url: "https://vimeo.com", name: "content_rating" },
-  cookie => {
+  (cookie) => {
     if (!vimeoOk(cookie)) {
       chrome.cookies.set(VIMMIEMIN);
     }
@@ -180,7 +189,7 @@ chrome.cookies.get(
 /** REMOVES COOKIES: main cookie from ixquick/startpage, dogpile's
  * search prefs, reddit's over18
  */
-chrome.cookies.onChanged.addListener(function(changeInfo) {
+chrome.cookies.onChanged.addListener(function (changeInfo) {
   if (changeInfo.removed) {
     return;
   }
@@ -257,6 +266,14 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
     _removeCookie(changeInfo.cookie);
   }
 
+  if (
+    changeInfo.cookie.domain === "search.brave.com" &&
+    changeInfo.cookie.name === "safesearch"
+  ) {
+    _removeCookie(changeInfo.cookie);
+    chrome.cookies.set(BRAVIE);
+  }
+
   // also needs to filter request for first request, see below
   if (
     changeInfo.cookie.domain === ".vimeo.com" &&
@@ -282,7 +299,7 @@ chrome.cookies.onChanged.addListener(function(changeInfo) {
         chrome.cookies.set({
           url: "https://youtube.com",
           name: "PREFS",
-          value: prefs.toString()
+          value: prefs.toString(),
         });
       }
     }

@@ -6,6 +6,7 @@ Vimeo, Reddit, Ecosia, Dailymotion, Qwant, Patreon, and Onesearch.
 [[https://addons.mozilla.org/de/firefox/addon/sas/][https://img.shields.io/amo/v/sas.svg]]
 [[https://chrome.google.com/webstore/detail/jsguardian/fiopkogmohpinncfhneadmpkcikmgkgc][https://img.shields.io/chrome-web-store/v/fiopkogmohpinncfhneadmpkcikmgkgc.svg]]
 * Versions
+** 6.4.0: Lacked Brave Search
 ** 6.3.0: Lacked youtube no-op mode
    as requested in https://github.com/serv-inc/safe-search/issues/39
 ** 6.2.1: Failed on Google after to page ids
