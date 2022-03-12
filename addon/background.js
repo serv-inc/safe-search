@@ -22,7 +22,7 @@ chrome.webRequest.onBeforeSendHeaders.addListener(
 chrome.webNavigation.onReferenceFragmentUpdated.addListener(
   function (details) {
     if (/(webhp|search).*q=/.test(details.url)) {
-      const newUrl = _metaAdd(details.url, ["safe", "ssui"], ["active", "on"]);
+      const newUrl = _metaAdd(details.url, ["safeui", "on"]);
       if (newUrl) {
         chrome.tabs.update(details.tabId, { url: newUrl });
       }
@@ -67,7 +67,7 @@ function _alter(uri) {
   } else if (/ecosia.*search/.test(uri)) {
     return _metaAdd(uri, ["safesearch"], ["2"]);
   } else if (/google.*(webhp|search).*q=/.test(uri)) {
-    return _metaAdd(uri, ["safe", "ssui"], ["active", "on"]);
+    return _metaAdd(uri, ["safeui", "on"]);
   } else if (/qwant.com/.test(uri)) {
     // seems to not be heeded
     return _metaAdd(uri, ["safesearch", "s"], ["2", "2"]);
