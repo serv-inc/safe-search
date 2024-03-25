@@ -24,10 +24,6 @@
       "include_globs": ["*google*"]
     },
     {
-      "matches": ["*://*.qwant.com/*"],
-      "js": ["qwant_safe.js"]
-    },
-    {
       "matches": ["*://www.youtube.com/watch*", "*://www.youtube.com/"],
       "js": ["youtube_safe.js"]
     }
