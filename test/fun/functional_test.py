@@ -7,7 +7,7 @@ from selenium import webdriver
 # __file__ = os.getcwd() + "/"  # paste this if by hand
 DIR = os.path.dirname(__file__)
 ADDON_DIR = os.path.abspath(os.path.join(DIR, "..", ".."))
-os.environ['PATH'] = os.environ['PATH'] + ":" + DIR
+os.environ["PATH"] = os.environ["PATH"] + ":" + DIR
 
 
 class DuckMixin(object):
@@ -25,9 +25,11 @@ class DuckMixin(object):
         self.search_porn()
 
     def search_porn(self):
-        (self.browser
-         .find_element_by_id("search_form_input_homepage")
-         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        (
+            self.browser.find_element_by_id("search_form_input_homepage").send_keys(
+                "porn" + webdriver.common.keys.Keys.RETURN
+            )
+        )
         # click to disable temporarily, then wait, then see if available
         self.browser.implicitly_wait(10)
         self.browser.find_element_by_class_name("js-safe-search-temp").click()
@@ -38,8 +40,11 @@ class DuckMixin(object):
 class GoogleMixin(object):
     def testGoo(self):
         self.browser.get("https://google.com")
-        (self.browser.find_element_by_css_selector("input[type=text]")
-         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        (
+            self.browser.find_element_by_css_selector("input[type=text]").send_keys(
+                "porn" + webdriver.common.keys.Keys.RETURN
+            )
+        )
         self.browser.implicitly_wait(2)
         try:
             self.browser.find_element_by_class_name("ab_ctl")
@@ -52,7 +57,10 @@ class QwantMixin(object):
         self.browser.get("https://qwant.com")
         self.assertEqual(
             2,
-            browser.execute_script("return applicationState.user.userSetting.safeSearch"))
+            browser.execute_script(
+                "return applicationState.user.userSetting.safeSearch"
+            ),
+        )
 
 
 class VimeoMixin(object):
@@ -61,24 +69,27 @@ class VimeoMixin(object):
         self.browser.implicitly_wait(10)
         # search
         self.browser.fullscreen_window()  # only visibile in above normal res
-        (self.browser.find_element_by_css_selector("div[role=search]>button")
-         .click())
-        (self.browser.switch_to_active_element()
-         .send_keys("porn" + webdriver.common.keys.Keys.RETURN))
+        (self.browser.find_element_by_css_selector("div[role=search]>button").click())
+        (
+            self.browser.switch_to_active_element().send_keys(
+                "porn" + webdriver.common.keys.Keys.RETURN
+            )
+        )
         # unset filter
-        (self.browser
-         .find_element_by_class_name("js-edit_mature_settings")
-         .click())
+        (self.browser.find_element_by_class_name("js-edit_mature_settings").click())
         self.browser.execute_script(
             "arguments[0].click()",
-            self.browser.find_element_by_id("contentrating_showall"))
+            self.browser.find_element_by_id("contentrating_showall"),
+        )
         self.browser.find_element_by_css_selector("input[type=submit]").click()
         # check
         self.browser.find_element_by_class_name("js-edit_mature_settings")
 
 
 #### run the tests, one case for each browser, with mixins for each site
-class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, GoogleMixin):
+class FirefoxTestCase(
+    unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, GoogleMixin
+):
     def setUp(self):
         self.browser = webdriver.Firefox()
         self.browser.install_addon(os.path.join(ADDON_DIR, "safe.xpi"), temporary=True)
@@ -87,7 +98,9 @@ class FirefoxTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, Goog
         self.browser.close()
 
 
-class ChromiumTestCase(unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, GoogleMixin):
+class ChromiumTestCase(
+    unittest.TestCase, DuckMixin, QwantMixin, VimeoMixin, GoogleMixin
+):
     def setUp(self):
         profile = webdriver.chrome.options.Options()
         profile.add_extension(extension=os.path.join(DIR, "..", "..", "safe.zip"))
