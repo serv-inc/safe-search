@@ -1,9 +1,7 @@
 LINT=npx eslint
 
 setup_py:
-	python3 -m venv .v
-	. .v/bin/activate
-	pip install -r requirements.txt
+	pipenv install
 
 zip: lint
 	cd addon; zip ../safe.zip *
@@ -29,7 +27,7 @@ test_manual:
 
 test: zip
 	cp safe.zip safe.xpi
-	. .v/bin/activate && py.test ./test/browserstack/simpleunittest.py
+	pipenv run py.test ./test/browserstack/simpleunittest.py
 
 dist: zip
 	node ./meta/upload.js
